@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notification Widget</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+
+  <!-- Notification Bell Button (Fixed to top-right) -->
+  <button
+    id="notification-btn"
+    class="fixed top-4 right-4 z-50 p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    aria-label="Open notifications"
+  >
+    <!-- Bell Icon (Lined SVG) -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+    </svg>
+    <!-- Unread Badge -->
+    <span class="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full animate-pulse"></span>
+  </button>
+
+  <!-- Popover Dropdown -->
+  <div
+    id="notification-popover"
+    class="fixed top-16 right-4 w-96 max-w-full z-40 opacity-0 scale-y-95 -translate-y-2 pointer-events-none transition-all duration-300 ease-out transform origin-top-right"
+    role="menu"
+    aria-labelledby="notification-btn"
+  >
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700">
+      
+      <!-- Header -->
+      <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Notifications</h3>
+        <button
+          id="close-popover"
+          class="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          aria-label="Close notifications"
+        >
+          <!-- Close Icon (×) -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Notification List -->
+      <div class="max-h-96 overflow-y-auto">
+        <!-- Notification Item (Unread) -->
+        <div class="flex items-start gap-3 p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer border-b border-gray-100 dark:border-gray-700">
+          <!-- Profile Icon -->
+          <div class="flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </div>
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-900 dark:text-white">Sarah Johnson</p>
+            <p class="text-sm text-gray-600 dark:text-gray-300 truncate">Started following you</p>
+          </div>
+          <!-- Timestamp -->
+          <div class="text-right">
+            <p class="text-xs text-gray-500 dark:text-gray-400">2 min ago</p>
+            <span class="inline-block w-2 h-2 bg-blue-500 rounded-full mt-1"></span>
+          </div>
+        </div>
+
+        <!-- Notification Item (Unread) -->
+        <div class="flex items-start gap-3 p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer border-b border-gray-100 dark:border-gray-700 bg-blue-50/50 dark:bg-blue-900/20">
+          <!-- Profile Icon -->
+          <div class="flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </div>
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-900 dark:text-white">Alex Chen</p>
+            <p class="text-sm text-gray-600 dark:text-gray-300 truncate">Commented on your post</p>
+          </div>
+          <!-- Timestamp -->
+          <div class="text-right">
+            <p class="text-xs text-gray-500 dark:text-gray-400">5 min ago</p>
+            <span class="inline-block w-2 h-2 bg-blue-500 rounded-full mt-1"></span>
+          </div>
+        </div>
+
+        <!-- Notification Item (Read) -->
+        <div class="flex items-start gap-3 p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer border-b border-gray-100 dark:border-gray-700 opacity-75">
+          <!-- Profile Icon -->
+          <div class="flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </div>
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Mike Davis</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 truncate">Liked your photo</p>
+          </div>
+          <!-- Timestamp -->
+          <div class="text-right">
+            <p class="text-xs text-gray-400 dark:text-gray-500">1 hour ago</p>
+          </div>
+        </div>
+
+        <!-- Notification Item (Read) -->
+        <div class="flex items-start gap-3 p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer opacity-75">
+          <!-- Profile Icon -->
+          <div class="flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </div>
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Emma Wilson</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 truncate">Sent you a message</p>
+          </div>
+          <!-- Timestamp -->
+          <div class="text-right">
+            <p class="text-xs text-gray-400 dark:text-gray-500">3 hours ago</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="p-3 border-t border-gray-200 dark:border-gray-700 text-center">
+        <a href="#" class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
+          View All Notifications
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dark Mode Toggle (for demo) -->
+  <div class="fixed bottom-4 right-4 z-50">
+    <button
+      id="theme-toggle"
+      class="p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-200"
+      aria-label="Toggle dark mode"
+    >
+      <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 hidden dark:inline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.485-9.485l-.707.707M4.222 4.222l.707.707m13.364 13.364l-.707.707M4.222 19.778l.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
+      </svg>
+      <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700 dark:hidden inline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+      </svg>
+    </button>
+  </div>
+
+  <script>
+    // DOM Elements
+    const notificationBtn = document.getElementById('notification-btn');
+    const popover = document.getElementById('notification-popover');
+    const closeBtn = document.getElementById('close-popover');
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+
+    // Toggle Popover
+    function togglePopover() {
+      const isOpen = popover.classList.contains('opacity-100');
+      
+      if (isOpen) {
+        closePopover();
+      } else {
+        openPopover();
+      }
+    }
+
+    function openPopover() {
+      popover.classList.remove('opacity-0', 'scale-y-95', '-translate-y-2', 'pointer-events-none');
+      popover.classList.add('opacity-100', 'scale-y-100', 'translate-y-0', 'pointer-events-auto');
+    }
+
+    function closePopover() {
+      popover.classList.remove('opacity-100', 'scale-y-100', 'translate-y-0', 'pointer-events-auto');
+      popover.classList.add('opacity-0', 'scale-y-95', '-translate-y-2', 'pointer-events-none');
+    }
+
+    // Event Listeners
+    notificationBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePopover();
+    });
+
+    closeBtn.addEventListener('click', closePopover);
+
+    // Close popover when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!popover.contains(e.target) && !notificationBtn.contains(e.target)) {
+        closePopover();
+      }
+    });
+
+    // Prevent popover from closing when clicking inside
+    popover.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Dark Mode Toggle
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      
+      // Optional: persist theme
+      if (document.documentElement.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // Load saved theme
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    });
+  </script>
+</body>
+</html>
