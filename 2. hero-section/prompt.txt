@@ -1,1 +1,21 @@
+We need to create an professional web development hero section. i want to use tailwind css. please create mockup code as per below instruction.
+1. there will be simple header. leftside stay logo with home url,  menu item will be center and rightside a button label "contact". menu will be
+"Services, Tracking, About, pricing Blog".
+2. Hero section : This section will be two column. left section will be content and right section will be graphic. butalso we needd a yellow round svg bg 
+like speed bubble or some cartoon style speed shape. I person image will floated it will be png image. and there will be three small round png icon. i wnt 
+to use good animation so it look like floating.
+3. hero left side will be a subheading at the top we need to add four words. after that please add a bold big banner title. also it will be 5 or 6 words.
+after that add a short description. it will be little light. after that add two button. one filled round yellow prrimary button. text check now. another button will be learn more.
+it will be white bg and dark text. please note image and content align will be center.
+
+4. At the bottom of the hero section use three inline text with icon like customer driven, time bound and safty. 
+5. in mobile please use hamburger icon with nice close animation.
+6. also please use aos animation here. banner icons appear one by one. as you wish you can add animation. 
+
+Remember mockup will be responsive and dak mode supoted. also need good animation. 
+
+Images link are
+a. logo : https://i.postimg.cc/prGfNbjx/logo.png
+b. banner img : https://i.postimg.cc/vTHrSHcq/banner-delivery-img-2jpeg.png
+on other please use svg images icon.
 
