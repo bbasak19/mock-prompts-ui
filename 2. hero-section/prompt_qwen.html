@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Web Development</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'float-fast': 'float 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .hamburger span {
+            height: 2px;
+            width: 100%;
+            background-color: currentColor;
+            transition: all 0.3s ease;
+        }
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="#" class="flex items-center">
+                    <img src="https://i.postimg.cc/prGfNbjx/logo.png" alt="Logo" class="h-10 w-auto">
+                </a>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#" class="font-medium hover:text-yellow-500 transition-colors">Services</a>
+                <a href="#" class="font-medium hover:text-yellow-500 transition-colors">Tracking</a>
+                <a href="#" class="font-medium hover:text-yellow-500 transition-colors">About</a>
+                <a href="#" class="font-medium hover:text-yellow-500 transition-colors">Pricing</a>
+                <a href="#" class="font-medium hover:text-yellow-500 transition-colors">Blog</a>
+            </nav>
+            
+            <!-- Contact Button & Mobile Menu -->
+            <div class="flex items-center space-x-4">
+                <a href="#" class="hidden md:block bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-2 px-6 rounded-full transition-colors shadow-md hover:shadow-lg">
+                    Contact
+                </a>
+                <button id="mobile-menu-button" class="md:hidden text-gray-800 dark:text-gray-200 focus:outline-none">
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white dark:bg-gray-800 shadow-lg">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                <a href="#" class="font-medium py-2">Services</a>
+                <a href="#" class="font-medium py-2">Tracking</a>
+                <a href="#" class="font-medium py-2">About</a>
+                <a href="#" class="font-medium py-2">Pricing</a>
+                <a href="#" class="font-medium py-2">Blog</a>
+                <a href="#" class="bg-yellow-400 text-gray-900 font-bold py-2 px-6 rounded-full text-center">
+                    Contact
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-16 md:py-24 overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <!-- Left Content -->
+                <div class="md:w-1/2 mb-12 md:mb-0 md:pr-8 text-center md:text-left">
+                    <div class="inline-block mb-4">
+                        <span class="text-yellow-500 font-bold text-sm tracking-wider">INNOVATIVE • RELIABLE • FAST • SECURE</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        Build <span class="text-yellow-500">Future-Proof</span> Web Solutions
+                    </h1>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg mx-auto md:mx-0">
+                        Professional web development services tailored to your business needs. We create stunning, high-performance websites that drive results.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#" class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full transition-colors shadow-lg hover:shadow-xl text-center">
+                            Check Now
+                        </a>
+                        <a href="#" class="bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-8 rounded-full transition-colors border border-gray-300 dark:border-gray-700 shadow hover:shadow-md text-center">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Right Graphic -->
+                <div class="md:w-1/2 relative flex justify-center">
+                    <!-- Yellow Speed Bubble Background -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <svg viewBox="0 0 400 400" class="w-64 h-64 md:w-80 md:h-80 opacity-20">
+                            <path d="M200,50 C280,50 320,150 280,250 C240,350 160,350 120,250 C80,150 120,50 200,50 Z" fill="#FBBF24" class="animate-float-slow"></path>
+                        </svg>
+                    </div>
+                    
+                    <!-- Person Image -->
+                    <div class="relative z-10">
+                        <img src="https://i.postimg.cc/vTHrSHcq/banner-delivery-img-2jpeg.png" alt="Web Developer" class="w-64 h-auto md:w-80 rounded-xl shadow-2xl animate-float">
+                    </div>
+                    
+                    <!-- Floating Icons -->
+                    <div class="absolute top-10 left-10">
+                        <div class="bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg animate-float">
+                            <i class="fas fa-rocket text-yellow-500 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-20 right-10">
+                        <div class="bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg animate-float-fast">
+                            <i class="fas fa-shield-alt text-yellow-500 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="absolute top-1/3 right-20">
+                        <div class="bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg animate-float-slow">
+                            <i class="fas fa-sync-alt text-yellow-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Features -->
+            <div class="mt-16 flex flex-wrap justify-center gap-8 md:gap-16">
+                <div class="flex items-center space-x-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-yellow-100 dark:bg-yellow-900/30 p-2 rounded-full">
+                        <i class="fas fa-users text-yellow-500"></i>
+                    </div>
+                    <span class="font-medium">Customer Driven</span>
+                </div>
+                <div class="flex items-center space-x-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-yellow-100 dark:bg-yellow-900/30 p-2 rounded-full">
+                        <i class="fas fa-clock text-yellow-500"></i>
+                    </div>
+                    <span class="font-medium">Time Bound</span>
+                </div>
+                <div class="flex items-center space-x-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-yellow-100 dark:bg-yellow-900/30 p-2 rounded-full">
+                        <i class="fas fa-shield-alt text-yellow-500"></i>
+                    </div>
+                    <span class="font-medium">Safety First</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburger = document.getElementById('hamburger');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburger.classList.toggle('open');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+                hamburger.classList.remove('open');
+            }
+        });
+        
+        // Add animation to hero content on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.opacity = '0';
+                heroContent.style.transform = 'translateY(20px)';
+                heroContent.classList.add('animate-fadeInUp');
+            }
+        });
+    </script>
+</body>
+</html>
+
