@@ -1,1 +1,61 @@
+Create a Notification Widget Box component for a dashboard UI using HTML, Tailwind CSS, and vanilla JavaScript (no frameworks).
+You do not need to build the full dashboard, only this widget feature.
 
+🔧 Functional Requirements
+
+Notification Icon Button
+
+Display a notification bell icon (lined SVG style). also icon will visible in the right site of the screen.
+
+When the user clicks this icon, a popover (dropdown box) should open or close.
+
+Use Tailwind CSS transitions for a smooth fade-and-slide animation (e.g., slide down with opacity transition).
+
+Popover Structure
+
+Header Section:
+
+Left: Label “Notifications” in bold text.
+
+Right: A close (×) icon button to close the popover.
+
+Notification List Section:
+
+Each item should include:
+
+A lined SVG profile icon on the left.
+
+A title and short description in the middle.
+
+A timestamp (e.g., “5 min ago”) on the right.
+
+Add visual distinction for unread notifications (slightly highlighted or bold).
+Read notifications appear normal or dimmed.
+
+Footer Section:
+
+A centered link/button labeled “View All Notifications”.
+
+UI / Styling Requirements
+
+Must be fully responsive (desktop & mobile friendly).
+
+Include both light and dark mode styling using Tailwind’s dark: variants.
+
+Use clean, minimal design — soft shadows, rounded corners, proper spacing.
+
+Use lined SVG icons (not filled) for all icons (bell, profile, close).
+
+Hover effects for notification items (slight background change).
+
+Smooth open/close animation for popover using Tailwind’s transition, transform, and opacity utilities.
+
+Technical Notes
+
+Use pure JavaScript to toggle the popover visibility and dark/light mode.
+
+Use Tailwind CSS classes only for all styling (no external CSS file).
+
+Include mock notification data (3–4 sample items) in the HTML for demonstration.
+
+Keep HTML semantic and well-structured.
