@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Loader -->
+    <div id="loader" class="fixed inset-0 bg-white dark:bg-gray-900 z-50 flex items-center justify-center">
+        <div class="flex flex-col items-center">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+            <p class="mt-4 text-gray-600 dark:text-gray-300">Loading Dashboard...</p>
+        </div>
+    </div>
+
+    <div class="flex h-screen">
+        <!-- Mobile Menu Button -->
+        <div class="lg:hidden fixed top-4 left-4 z-40">
+            <button id="mobileMenuButton" class="p-2 rounded-md bg-white dark:bg-gray-800 shadow-md text-gray-600 dark:text-gray-300">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 bg-white dark:bg-gray-800 shadow-lg flex flex-col fixed lg:static inset-y-0 left-0 z-30 transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
+            <!-- Logo and Close Button -->
+            <div class="p-4 border-b dark:border-gray-700 flex justify-between items-center">
+                <h1 class="text-xl font-bold text-blue-600 dark:text-blue-400 flex items-center">
+                    <i class="fas fa-chart-line mr-2"></i> DashboardPro
+                </h1>
+                <button id="closeSidebar" class="lg:hidden text-gray-500 dark:text-gray-400">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Quick Profile -->
+            <div class="p-4 border-b dark:border-gray-700 flex items-center space-x-3">
+                <div class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                    <span class="font-bold">JD</span>
+                </div>
+                <div>
+                    <p class="font-medium dark:text-white">John Doe</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Administrator</p>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <div class="flex-1 overflow-y-auto py-4">
+                <ul class="space-y-1 px-2">
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <i class="fas fa-home mr-3"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <i class="fas fa-chart-bar mr-3"></i>
+                            <span>Analytics</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Nested Menu -->
+                    <li>
+                        <details class="group">
+                            <summary class="flex items-center p-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer transition-colors">
+                                <i class="fas fa-shopping-cart mr-3"></i>
+                                <span>Products</span>
+                                <i class="fas fa-chevron-down ml-auto text-xs transition-transform group-open:rotate-180"></i>
+                            </summary>
+                            <ul class="ml-6 mt-1 space-y-1">
+                                <li>
+                                    <a href="#" class="flex items-center p-2 text-gray-600 dark:text-gray-400 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
+                                        <i class="fas fa-list mr-3"></i>
+                                        <span>All Products</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex items-center p-2 text-gray-600 dark:text-gray-400 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
+                                        <i class="fas fa-plus-circle mr-3"></i>
+                                        <span>Add New</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex items-center p-2 text-gray-600 dark:text-gray-400 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
+                                        <i class="fas fa-tags mr-3"></i>
+                                        <span>Categories</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </li>
+                    
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <i class="fas fa-users mr-3"></i>
+                            <span>Customers</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Divider -->
+                    <li class="pt-2 mt-2 border-t dark:border-gray-700">
+                        <span class="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Settings</span>
+                    </li>
+                    
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <i class="fas fa-cog mr-3"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <i class="fas fa-question-circle mr-3"></i>
+                            <span>Help & Support</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Logout Button -->
+            <div class="p-4 border-t dark:border-gray-700">
+                <button class="flex items-center w-full p-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-red-50 dark:hover:bg-gray-700 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden lg:ml-0">
+            <!-- Header -->
+            <header class="bg-white dark:bg-gray-800 shadow-sm z-10">
+                <div class="flex items-center justify-between p-4">
+                    <div class="flex items-center">
+                        <h2 class="text-xl font-semibold text-gray-800 dark:text-white">Dashboard Overview</h2>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <!-- Dark Mode Toggle -->
+                        <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors">
+                            <i class="fas fa-moon" id="darkIcon"></i>
+                            <i class="fas fa-sun hidden" id="lightIcon"></i>
+                        </button>
+                        
+                        <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors">
+                            <i class="fas fa-bell"></i>
+                        </button>
+                        <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-4 lg:p-6">
+                <!-- Dashboard Widgets -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-6 lg:mb-8">
+                    <!-- Widget 1 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700">
+                        <div class="p-4 border-b dark:border-gray-700 flex justify-between items-center">
+                            <h3 class="font-medium dark:text-white">Sales Overview</h3>
+                            <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 widget-toggle transition-colors">
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                        </div>
+                        <div class="p-4 widget-content">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <p class="text-2xl font-bold dark:text-white">$24,569</p>
+                                    <p class="text-sm text-green-500">+12.5% from last month</p>
+                                </div>
+                                <div class="h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                                    <i class="fas fa-chart-line text-green-600 dark:text-green-400"></i>
+                                </div>
+                            </div>
+                            <div class="h-32 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center">
+                                <p class="text-gray-500 dark:text-gray-400">Chart visualization</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Widget 2 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700">
+                        <div class="p-4 border-b dark:border-gray-700 flex justify-between items-center">
+                            <h3 class="font-medium dark:text-white">User Statistics</h3>
+                            <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 widget-toggle transition-colors">
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                        </div>
+                        <div class="p-4 widget-content">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <p class="text-2xl font-bold dark:text-white">1,248</p>
+                                    <p class="text-sm text-blue-500">+8.2% new users</p>
+                                </div>
+                                <div class="h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                    <i class="fas fa-users text-blue-600 dark:text-blue-400"></i>
+                                </div>
+                            </div>
+                            <div class="h-32 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center">
+                                <p class="text-gray-500 dark:text-gray-400">Chart visualization</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Widget 3 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700">
+                        <div class="p-4 border-b dark:border-gray-700 flex justify-between items-center">
+                            <h3 class="font-medium dark:text-white">Order Summary</h3>
+                            <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 widget-toggle transition-colors">
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                        </div>
+                        <div class="p-4 widget-content">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <p class="text-2xl font-bold dark:text-white">356</p>
+                                    <p class="text-sm text-yellow-500">+5.7% from last week</p>
+                                </div>
+                                <div class="h-12 w-12 rounded-full bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center">
+                                    <i class="fas fa-shopping-cart text-yellow-600 dark:text-yellow-400"></i>
+                                </div>
+                            </div>
+                            <div class="h-32 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center">
+                                <p class="text-gray-500 dark:text-gray-400">Chart visualization</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons Section -->
+                <div class="mb-6 lg:mb-8">
+                    <h3 class="text-lg font-medium mb-4 dark:text-white">Button Variants</h3>
+                    <div class="flex flex-wrap gap-3 lg:gap-4">
+                        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            Primary Button
+                        </button>
+                        <button class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                            Secondary Button
+                        </button>
+                        <button class="px-4 py-2 border border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                            Outline Button
+                        </button>
+                        <button class="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="p-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button class="p-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chart Section -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 p-4 lg:p-6 mb-6 lg:mb-8">
+                    <h3 class="text-lg font-medium mb-4 dark:text-white">Revenue Chart</h3>
+                    <div class="h-64 lg:h-80">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Form Section -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 p-4 lg:p-6 mb-6 lg:mb-8">
+                    <h3 class="text-lg font-medium mb-4 dark:text-white">Modern Form</h3>
+                    <form id="sampleForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" placeholder="Enter your name">
+                                <p class="mt-1 text-sm text-red-600 hidden" id="nameError">Name is required</p>
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" placeholder="Enter your email">
+                                <p class="mt-1 text-sm text-red-600 hidden" id="emailError">Valid email is required</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category</label>
+                                <select id="category" name="category" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
+                                    <option value="">Select a category</option>
+                                    <option value="tech">Technology</option>
+                                    <option value="health">Health</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="education">Education</option>
+                                </select>
+                                <p class="mt-1 text-sm text-red-600 hidden" id="categoryError">Please select a category</p>
+                            </div>
+
+                            <div>
+                                <label for="autocomplete" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Auto Complete</label>
+                                <input type="text" id="autocomplete" name="autocomplete" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" placeholder="Start typing...">
+                                <div id="suggestions" class="hidden mt-1 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 shadow-lg max-h-60 overflow-y-auto z-10 absolute w-full md:w-1/2"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Upload File</label>
+                            <div class="flex items-center justify-center w-full">
+                                <label for="file" class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <i class="fas fa-cloud-upload-alt text-gray-400 dark:text-gray-500 text-2xl mb-2"></i>
+                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, PDF (MAX. 10MB)</p>
+                                    </div>
+                                    <input id="file" type="file" class="hidden" />
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <input id="terms" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 rounded dark:bg-gray-700">
+                            <label for="terms" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                                I agree to the <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-500">terms and conditions</a>
+                            </label>
+                        </div>
+
+                        <div class="flex justify-end space-x-4">
+                            <button type="reset" class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                Reset
+                            </button>
+                            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Data Table -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 p-4 lg:p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 space-y-3 md:space-y-0">
+                        <h3 class="text-lg font-medium dark:text-white">User Management</h3>
+                        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 w-full md:w-auto">
+                            <div class="relative">
+                                <input type="text" id="searchTable" placeholder="Search..." class="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white w-full">
+                                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                            </div>
+                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap">
+                                <i class="fas fa-plus mr-2"></i> Add User
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead class="bg-gray-50 dark:bg-gray-700">
+                                <tr>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer sortable" data-sort="name">
+                                        Name <i class="fas fa-sort ml-1"></i>
+                                    </th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer sortable" data-sort="email">
+                                        Email <i class="fas fa-sort ml-1"></i>
+                                    </th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer sortable" data-sort="role">
+                                        Role <i class="fas fa-sort ml-1"></i>
+                                    </th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer sortable" data-sort="status">
+                                        Status <i class="fas fa-sort ml-1"></i>
+                                    </th>
+                                    <th scope="col" class="px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                <tr>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                                                <span class="font-bold">JD</span>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900 dark:text-white">John Doe</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900 dark:text-white">john.doe@example.com</div>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">Admin</span>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">Active</span>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <button class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 mr-3 view-btn">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="text-yellow-600 dark:text-yellow-400 hover:text-yellow-900 dark:hover:text-yellow-300 mr-3 edit-btn">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 delete-btn">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="h-10 w-10 rounded-full bg-green-500 flex items-center justify-center text-white">
+                                                <span class="font-bold">AS</span>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900 dark:text-white">Alice Smith</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900 dark:text-white">alice.smith@example.com</div>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300">User</span>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">Active</span>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <button class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 mr-3 view-btn">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="text-yellow-600 dark:text-yellow-400 hover:text-yellow-900 dark:hover:text-yellow-300 mr-3 edit-btn">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 delete-btn">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="h-10 w-10 rounded-full bg-purple-500 flex items-center justify-center text-white">
+                                                <span class="font-bold">RJ</span>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900 dark:text-white">Robert Johnson</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900 dark:text-white">robert.j@example.com</div>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200">Moderator</span>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200">Inactive</span>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <button class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 mr-3 view-btn">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="text-yellow-600 dark:text-yellow-400 hover:text-yellow-900 dark:hover:text-yellow-300 mr-3 edit-btn">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 delete-btn">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer class="bg-white dark:bg-gray-800 border-t dark:border-gray-700 py-4">
+                <div class="px-4 lg:px-6">
+                    <p class="text-center text-sm text-gray-500 dark:text-gray-400">
+                        &copy; 2023 DashboardPro. All rights reserved.
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Simulate page loading
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.getElementById('loader').style.display = 'none';
+            }, 1500);
+            
+            // Initialize Chart
+            const ctx = document.getElementById('lineChart').getContext('2d');
+            const lineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Revenue',
+                        data: [12000, 19000, 15000, 25000, 22000, 30000, 28000, 35000, 30000, 40000, 38000, 45000],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                color: document.documentElement.classList.contains('dark') ? '#fff' : '#000'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                drawBorder: false,
+                                color: document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+                            },
+                            ticks: {
+                                color: document.documentElement.classList.contains('dark') ? '#fff' : '#000'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: document.documentElement.classList.contains('dark') ? '#fff' : '#000'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Mobile Menu Toggle
+            document.getElementById('mobileMenuButton').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.toggle('-translate-x-full');
+            });
+
+            document.getElementById('closeSidebar').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+            });
+
+            // Dark Mode Toggle
+            document.getElementById('darkModeToggle').addEventListener('click', function() {
+                document.documentElement.classList.toggle('dark');
+                
+                const darkIcon = document.getElementById('darkIcon');
+                const lightIcon = document.getElementById('lightIcon');
+                
+                if (document.documentElement.classList.contains('dark')) {
+                    darkIcon.classList.add('hidden');
+                    lightIcon.classList.remove('hidden');
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    darkIcon.classList.remove('hidden');
+                    lightIcon.classList.add('hidden');
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+                
+                // Update chart colors for dark mode
+                updateChartColors();
+            });
+
+            // Check for saved dark mode preference
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.documentElement.classList.add('dark');
+                document.getElementById('darkIcon').classList.add('hidden');
+                document.getElementById('lightIcon').classList.remove('hidden');
+                updateChartColors();
+            }
+
+            // Function to update chart colors for dark mode
+            function updateChartColors() {
+                const isDark = document.documentElement.classList.contains('dark');
+                lineChart.options.scales.y.grid.color = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+                lineChart.options.scales.y.ticks.color = isDark ? '#fff' : '#000';
+                lineChart.options.scales.x.ticks.color = isDark ? '#fff' : '#000';
+                lineChart.options.plugins.legend.labels.color = isDark ? '#fff' : '#000';
+                lineChart.update();
+            }
+
+            // Widget Toggle Functionality
+            document.querySelectorAll('.widget-toggle').forEach(button => {
+                button.addEventListener('click', function() {
+                    const content = this.closest('.border-b').nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    if (content.style.display === 'none') {
+                        content.style.display = 'block';
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        content.style.display = 'none';
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+
+            // Form Validation
+            document.getElementById('sampleForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // Name validation
+                const name = document.getElementById('name');
+                const nameError = document.getElementById('nameError');
+                if (!name.value.trim()) {
+                    nameError.classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    nameError.classList.add('hidden');
+                }
+                
+                // Email validation
+                const email = document.getElementById('email');
+                const emailError = document.getElementById('emailError');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!email.value.trim() || !emailRegex.test(email.value)) {
+                    emailError.classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    emailError.classList.add('hidden');
+                }
+                
+                // Category validation
+                const category = document.getElementById('category');
+                const categoryError = document.getElementById('categoryError');
+                if (!category.value) {
+                    categoryError.classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    categoryError.classList.add('hidden');
+                }
+                
+                if (isValid) {
+                    alert('Form submitted successfully!');
+                }
+            });
+
+            // Auto Complete
+            const autocomplete = document.getElementById('autocomplete');
+            const suggestions = document.getElementById('suggestions');
+            const sampleData = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry', 'Fig', 'Grape', 'Honeydew'];
+            
+            autocomplete.addEventListener('input', function() {
+                const value = this.value.toLowerCase();
+                if (value) {
+                    const filteredData = sampleData.filter(item => 
+                        item.toLowerCase().includes(value)
+                    );
+                    
+                    if (filteredData.length > 0) {
+                        suggestions.innerHTML = filteredData.map(item => 
+                            `<div class="p-2 hover:bg-blue-50 dark:hover:bg-gray-600 cursor-pointer dark:text-white">${item}</div>`
+                        ).join('');
+                        suggestions.classList.remove('hidden');
+                    } else {
+                        suggestions.classList.add('hidden');
+                    }
+                } else {
+                    suggestions.classList.add('hidden');
+                }
+            });
+            
+            suggestions.addEventListener('click', function(e) {
+                if (e.target.classList.contains('cursor-pointer')) {
+                    autocomplete.value = e.target.textContent;
+                    suggestions.classList.add('hidden');
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (e.target !== autocomplete) {
+                    suggestions.classList.add('hidden');
+                }
+            });
+
+            // Table Search
+            document.getElementById('searchTable').addEventListener('input', function() {
+                const searchValue = this.value.toLowerCase();
+                const rows = document.querySelectorAll('tbody tr');
+                
+                rows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    if (text.includes(searchValue)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+
+            // Table Sorting
+            document.querySelectorAll('.sortable').forEach(header => {
+                header.addEventListener('click', function() {
+                    const column = this.getAttribute('data-sort');
+                    const tbody = this.closest('table').querySelector('tbody');
+                    const rows = Array.from(tbody.querySelectorAll('tr'));
+                    const isAsc = this.classList.contains('asc');
+                    
+                    // Reset all headers
+                    document.querySelectorAll('.sortable').forEach(h => {
+                        h.classList.remove('asc', 'desc');
+                        const icon = h.querySelector('i');
+                        icon.className = 'fas fa-sort ml-1';
+                    });
+                    
+                    // Sort rows
+                    rows.sort((a, b) => {
+                        let aValue, bValue;
+                        
+                        if (column === 'name') {
+                            aValue = a.querySelector('.text-sm.font-medium').textContent;
+                            bValue = b.querySelector('.text-sm.font-medium').textContent;
+                        } else if (column === 'email') {
+                            aValue = a.cells[1].textContent;
+                            bValue = b.cells[1].textContent;
+                        } else if (column === 'role') {
+                            aValue = a.cells[2].textContent;
+                            bValue = b.cells[2].textContent;
+                        } else if (column === 'status') {
+                            aValue = a.cells[3].textContent;
+                            bValue = b.cells[3].textContent;
+                        }
+                        
+                        if (isAsc) {
+                            return aValue.localeCompare(bValue);
+                        } else {
+                            return bValue.localeCompare(aValue);
+                        }
+                    });
+                    
+                    // Update table
+                    rows.forEach(row => tbody.appendChild(row));
+                    
+                    // Update header state
+                    if (isAsc) {
+                        this.classList.remove('asc');
+                        this.classList.add('desc');
+                        this.querySelector('i').className = 'fas fa-sort-down ml-1';
+                    } else {
+                        this.classList.remove('desc');
+                        this.classList.add('asc');
+                        this.querySelector('i').className = 'fas fa-sort-up ml-1';
+                    }
+                });
+            });
+
+            // Table Actions
+            document.querySelectorAll('.view-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const name = this.closest('tr').querySelector('.text-sm.font-medium').textContent;
+                    alert(`Viewing details for: ${name}`);
+                });
+            });
+            
+            document.querySelectorAll('.edit-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const name = this.closest('tr').querySelector('.text-sm.font-medium').textContent;
+                    alert(`Editing user: ${name}`);
+                });
+            });
+            
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const name = this.closest('tr').querySelector('.text-sm.font-medium').textContent;
+                    if (confirm(`Are you sure you want to delete ${name}?`)) {
+                        this.closest('tr').remove();
+                        alert(`${name} has been deleted.`);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
