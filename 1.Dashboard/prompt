@@ -1,0 +1,11 @@
+Can you create an dashboard main page html, css and js.
+I want to use tailwind css. Please focus on the below compoment
+A. Side menu bar it is very much important. menu item need to be nested. Also there will be divider. Also you can add logo on the sidebar. and quick profile and logout bottom.
+B. bashboard pannel widget. it will title and content. also it is collapseble.
+C. Add a loader for page.
+D. we need button with three varient one primary, secndary and outline button. also some icon button needed.
+E. A simple line chart need to be added.
+F. Please create mordern form option like label, field, upload, auto complete etc. you can use validation plugin. please use all form field.
+G. Please add datatable with view, edit and delete option. Sort and filter will be add.
+H. Footer just need copyright text.
+I. Also it need to be responsive and it also need light and dark mode. Please also added animation css for look good.
