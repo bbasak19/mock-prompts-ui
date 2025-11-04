@@ -1,0 +1,38 @@
+You are an expert front-end developer and a Tailwind CSS specialist. Your task is to generate a complete, single-file mockup containing HTML, Tailwind CSS (using CDN), and JavaScript for a modern, responsive product card component.
+
+**Component Requirements:**
+1.  **Framework:** Must use **Tailwind CSS classes** for all styling. Use modern, clean aesthetics.
+2.  **Responsiveness:** The card must look good on both mobile and desktop screens.
+3.  **Animation:**
+    * Implement a noticeable, smooth **3D lift and subtle glow hover animation on the entire card** (e.g., `scale`, `shadow`, and a subtle `ring` effect).
+    * Include a subtle, satisfying **transition/animation on the "Add to Cart" button** when clicked or hovered.
+
+**Content and Structure:**
+1.  **Multiple Product Images (with CDN):**
+    * Implement a simple **image slider/carousel** (using minimal CSS and pure JavaScript) on the image area to show 3 sample product images.
+    * **Use the following CDN links for the images:**
+        * Image 1: `https://picsum.photos/seed/tech-product-1/400/500`
+        * Image 2: `https://picsum.photos/seed/tech-product-2/400/500`
+        * Image 3: `https://picsum.photos/seed/tech-product-3/400/500`
+2.  **Image Overlays:**
+    * In the top-right corner of the image, place a prominent, rounded **Offer Badge** (e.g., "-20%").
+    * Next to the badge, place a standalone **Favorite/Wishlist Icon** (use a simple SVG). This icon should change color on hover.
+3.  **Product Details:**
+    * A bold **Product Title** (e.g., "Zenith Pro Headphones").
+    * A clearly visible **Price** and a **Strikethrough Original Price** for contrast.
+    * A simple **star rating** (e.g., 4.5 stars with 5 star icons) and the number of reviews (e.g., "(245 reviews)").
+4.  **New Feature:** **Quick Color Selector:** Immediately above the "Add to Cart" button, include a small, horizontal row of clickable **color swatch circles** (e.g., Black, Red, Blue).
+5.  **Action Button:** Include a "Buy Now" or "Add to Cart" button with an **SVG cart icon**.
+
+**Color Palette: "Tech-Luxe Contrast" (Apply these Tailwind classes):**
+* **Card Background:** `bg-white` or `bg-gray-50`
+* **Primary Text:** `text-gray-900` or `text-slate-800`
+* **Primary Button (CTA):** `bg-indigo-600` (`hover:bg-indigo-700`, `focus:ring-indigo-500`) with `text-white`
+* **Offer Badge:** `bg-rose-500` with `text-white`
+* **Favorite Icon:** `text-gray-400` (`hover:text-red-500`)
+* **Star Rating:** Use a vibrant `text-amber-400` or `text-yellow-500` for filled stars.
+* **Card Border/Shadow:** `shadow-lg` (`hover:shadow-xl`, `hover:ring-2 hover:ring-indigo-500 hover:ring-opacity-50`)
+
+**Output Format:**
+* Provide the entire solution in a single HTML file using `<script>` and `<style>` tags (or Tailwind classes directly).
+* Ensure all JavaScript is pure JS (no external libraries apart from Tailwind CDN).
