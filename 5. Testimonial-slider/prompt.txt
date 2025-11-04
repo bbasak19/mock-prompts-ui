@@ -1,0 +1,72 @@
+Generate the complete HTML, CSS, and necessary JavaScript for a visually distinct, fully responsive testimonial slider component. The design must adhere to the following specifications. Do not use any CSS frameworks; all styling must be achieved with custom CSS classes.
+
+Structure & Layout & Styling:
+Main Container: Create a main wrapper for the entire testimonial component (.testimonial-wrapper).
+
+Slider Structure: The Swiper slider must contain the entire layout of both the testimonial info and the graphic.
+
+Each Swiper Slide (.swiper-slide) must contain both the left-side info box and the corresponding right-side graphic. The overall layout within the slide should place the info box over the graphic.
+
+Right Side Graphic (.graphic-container - 70% Width):
+
+Must be placed inside the Swiper slide and take up 70% of the total slide width on large screens.
+
+The image must be aligned to the right within the slide.
+
+The image must have a border-radius of 20px.
+
+Use the following image URLs for the three placeholder slides:
+
+Slide 1 Image: https://images.unsplash.com/photo-1490730141103-6cac27aaab94?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170
+
+Slide 2 Image: https://images.unsplash.com/photo-1536706936563-c9e47fc563df?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1169
+
+Slide 3 Image: https://images.unsplash.com/photo-1557933542-85f18ae1df16?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170
+
+Left Side Testimonial Info (.testimonial-info-container - 520px Width):
+
+Must be placed inside the Swiper slide and have a fixed width of 520px on large screens.
+
+Crucially: This container must be positioned absolutely within the slide to overlap and sit above the large graphic on the right, achieving a layered look.
+
+Visual Style: This container must be a white box with a semi-transparent background effect using backdrop-filter: blur(...) (frosted glass look), and it must have a subtle box-shadow for depth.
+
+Testimonial Content Styling:
+Quote Styling (SVG Icon): The testimonial text must be clearly presented.
+
+Use a large SVG quote icon positioned at the top of the quote text.
+
+The SVG icon must have low opacity and be styled to visually overlap the quote text, creating a strong background element.
+
+The quote text must have a font-size of 20px and a font-weight of 300 (light).
+
+Profile Info: Below the quote, include profile information (avatar, name, occupation) presented side-by-side.
+
+Responsiveness Requirement:
+Implement Media Queries in the CSS to ensure the layout remains functional and readable on screens smaller than approximately 1024px. On smaller screens, the layout must adapt by stacking the testimonial info box above the graphic or using fluid percentages instead of fixed pixels.
+
+Slider Functionality:
+Swiper Integration: Implement the slider functionality using the Swiper.js library.
+
+Navigation Arrows (Custom Position): The slider must include Next and Previous navigation arrows.
+
+The Previous Arrow (.swiper-button-prev) must be positioned specifically on the far left side of the main component area.
+
+The Next Arrow (.swiper-button-next) must be positioned specifically on the far right side of the main component area.
+
+No Pagination: The slider must not include any dot or fractional pagination.
+
+Animation Requirements (Client Request):
+Quote Animation: New quote text animates in using a subtle slide-up or fade-in-up animation upon slide change.
+
+Profile Animation: Profile info animates in with a slight delay after the quote, perhaps a fade-in or slide-in-right effect.
+
+Graphic Animation: The large right-side graphic should have a continuous, subtle background animation or a mild pulse effect on the image container itself.
+
+Implementation Details:
+Use CSS @keyframes for all animations.
+
+Apply custom classes (e.g., .frosted-box, .prev-arrow-left, .next-arrow-right) to achieve all specified styles and layouts.
+
+Placeholder Data:
+Use three different placeholder testimonials and the provided image URLs for demonstration.
