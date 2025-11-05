@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Wireless Headphones | AudioTech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(100%)' },
+                            '100%': { transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Skeleton Loading State -->
+    <div id="skeleton-loader" class="min-h-screen">
+        <!-- Header Skeleton -->
+        <header class="border-b border-gray-200 dark:border-gray-800 py-4">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center">
+                    <div class="h-8 w-32 bg-gray-300 dark:bg-gray-700 rounded animate-pulse"></div>
+                    <div class="flex space-x-4">
+                        <div class="h-8 w-8 bg-gray-300 dark:bg-gray-700 rounded-full animate-pulse"></div>
+                        <div class="h-8 w-8 bg-gray-300 dark:bg-gray-700 rounded-full animate-pulse"></div>
+                        <div class="h-8 w-8 bg-gray-300 dark:bg-gray-700 rounded-full animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Product Skeleton -->
+        <main class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Image Gallery Skeleton -->
+                <div>
+                    <div class="h-96 bg-gray-300 dark:bg-gray-700 rounded-xl animate-pulse mb-4"></div>
+                    <div class="grid grid-cols-4 gap-4">
+                        <div class="h-20 bg-gray-300 dark:bg-gray-700 rounded-lg animate-pulse"></div>
+                        <div class="h-20 bg-gray-300 dark:bg-gray-700 rounded-lg animate-pulse"></div>
+                        <div class="h-20 bg-gray-300 dark:bg-gray-700 rounded-lg animate-pulse"></div>
+                        <div class="h-20 bg-gray-300 dark:bg-gray-700 rounded-lg animate-pulse"></div>
+                    </div>
+                </div>
+
+                <!-- Product Details Skeleton -->
+                <div class="space-y-6">
+                    <div class="h-8 bg-gray-300 dark:bg-gray-700 rounded animate-pulse w-3/4"></div>
+                    <div class="h-6 bg-gray-300 dark:bg-gray-700 rounded animate-pulse w-1/2"></div>
+                    <div class="h-4 bg-gray-300 dark:bg-gray-700 rounded animate-pulse w-full"></div>
+                    <div class="h-4 bg-gray-300 dark:bg-gray-700 rounded animate-pulse w-5/6"></div>
+                    <div class="h-4 bg-gray-300 dark:bg-gray-700 rounded animate-pulse w-4/5"></div>
+                    
+                    <div class="h-10 bg-gray-300 dark:bg-gray-700 rounded animate-pulse w-1/3"></div>
+                    
+                    <div class="h-12 bg-gray-300 dark:bg-gray-700 rounded animate-pulse w-full"></div>
+                    <div class="h-12 bg-gray-300 dark:bg-gray-700 rounded animate-pulse w-full"></div>
+                    
+                    <div class="h-6 bg-gray-300 dark:bg-gray-700 rounded animate-pulse w-2/3"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Actual Product Content (initially hidden) -->
+    <div id="product-content" class="hidden min-h-screen">
+        <!-- Header with Dark Mode Toggle -->
+        <header class="border-b border-gray-200 dark:border-gray-800 py-4 sticky top-0 bg-white dark:bg-gray-900 z-50 transition-colors duration-300">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center">
+                    <a href="#" class="text-2xl font-bold text-primary-600 dark:text-primary-400">AudioTech</a>
+                    <div class="flex items-center space-x-4">
+                        <button id="dark-mode-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                            <i class="fas fa-moon text-gray-600 dark:text-yellow-400"></i>
+                        </button>
+                        <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                            <i class="fas fa-shopping-cart text-gray-600 dark:text-gray-300"></i>
+                        </button>
+                        <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                            <i class="fas fa-user text-gray-600 dark:text-gray-300"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Product Section -->
+        <main class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Product Media Section -->
+                <div class="space-y-4">
+                    <!-- Main Image with Zoom -->
+                    <div class="relative overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800 aspect-square" id="image-zoom-container">
+                        <img 
+                            src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                            alt="Premium Wireless Headphones" 
+                            class="w-full h-full object-cover transition-transform duration-300 cursor-zoom-in"
+                            id="main-product-image"
+                        >
+                        <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
+                            <span class="text-white opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 px-3 py-1 rounded-full text-sm">
+                                Click to zoom
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Thumbnail Gallery -->
+                    <div class="grid grid-cols-4 gap-4">
+                        <button class="thumbnail-btn rounded-lg overflow-hidden border-2 border-primary-500 transition-all duration-300 transform hover:scale-105 active:scale-95" data-image="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80">
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Headphones front view" class="w-full h-20 object-cover">
+                        </button>
+                        <button class="thumbnail-btn rounded-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:scale-105 active:scale-95" data-image="https://images.unsplash.com/photo-1484704849700-f032a568e944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80">
+                            <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Headphones side view" class="w-full h-20 object-cover">
+                        </button>
+                        <button class="thumbnail-btn rounded-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:scale-105 active:scale-95" data-image="https://images.unsplash.com/photo-1521334884684-d80222895322?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80">
+                            <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Headphones in case" class="w-full h-20 object-cover">
+                        </button>
+                        <button class="media-btn rounded-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center" data-type="video">
+                            <i class="fas fa-play text-primary-500 text-xl mb-1"></i>
+                            <span class="text-xs text-gray-600 dark:text-gray-400">Video</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Details Section -->
+                <div class="space-y-6">
+                    <!-- Breadcrumb -->
+                    <nav class="text-sm text-gray-500 dark:text-gray-400">
+                        <a href="#" class="hover:text-primary-500 transition-colors">Home</a> / 
+                        <a href="#" class="hover:text-primary-500 transition-colors">Audio</a> / 
+                        <a href="#" class="hover:text-primary-500 transition-colors">Headphones</a> / 
+                        <span class="text-gray-800 dark:text-gray-200">Wireless Pro</span>
+                    </nav>
+
+                    <!-- Product Title & Rating -->
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">AudioTech Wireless Pro Headphones</h1>
+                        <div class="flex items-center mt-2 space-x-2">
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-600 dark:text-gray-400">4.5 (128 reviews)</span>
+                        </div>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="flex items-center space-x-4">
+                        <span class="text-3xl font-bold text-primary-600 dark:text-primary-400">$249.99</span>
+                        <span class="text-lg text-gray-500 dark:text-gray-400 line-through">$299.99</span>
+                        <span class="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-2 py-1 rounded text-sm font-medium">Save $50</span>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="text-gray-600 dark:text-gray-300 space-y-2">
+                        <p>Experience premium sound quality with our Wireless Pro headphones. Featuring active noise cancellation, 30-hour battery life, and premium comfort for all-day listening.</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Active Noise Cancellation technology</li>
+                            <li>30-hour battery life with quick charge</li>
+                            <li>Premium memory foam ear cushions</li>
+                            <li>Voice assistant compatible</li>
+                        </ul>
+                    </div>
+
+                    <!-- Color Selection -->
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Color</h3>
+                        <div class="flex space-x-3">
+                            <button class="color-swatch w-10 h-10 rounded-full bg-black border-2 border-gray-300 dark:border-gray-700 ring-2 ring-offset-2 ring-primary-500 transition-all duration-300 transform hover:scale-110" data-color="black"></button>
+                            <button class="color-swatch w-10 h-10 rounded-full bg-gray-400 border-2 border-gray-300 dark:border-gray-700 ring-2 ring-offset-2 ring-transparent transition-all duration-300 transform hover:scale-110" data-color="gray"></button>
+                            <button class="color-swatch w-10 h-10 rounded-full bg-blue-500 border-2 border-gray-300 dark:border-gray-700 ring-2 ring-offset-2 ring-transparent transition-all duration-300 transform hover:scale-110" data-color="blue"></button>
+                            <button class="color-swatch w-10 h-10 rounded-full bg-red-500 border-2 border-gray-300 dark:border-gray-700 ring-2 ring-offset-2 ring-transparent transition-all duration-300 transform hover:scale-110" data-color="red"></button>
+                        </div>
+                    </div>
+
+                    <!-- Size Selection -->
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Size</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="size-option px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg transition-all duration-300 bg-primary-500 text-white font-medium" data-size="standard">Standard</button>
+                            <button class="size-option px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800" data-size="travel">Travel Case</button>
+                            <button class="size-option px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800" data-size="premium">Premium Bundle</button>
+                        </div>
+                    </div>
+
+                    <!-- Quantity Selector -->
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Quantity</h3>
+                        <div class="flex items-center">
+                            <button id="decrease-qty" class="p-2 rounded-l-lg border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" id="quantity" value="1" min="1" max="10" class="w-16 text-center py-2 border-y border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900">
+                            <button id="increase-qty" class="p-2 rounded-r-lg border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                        <button class="add-to-cart-btn flex-1 py-3 px-6 bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center space-x-2">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Add to Cart</span>
+                        </button>
+                        <button class="flex-1 py-3 px-6 bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95">
+                            Buy Now
+                        </button>
+                    </div>
+
+                    <!-- Additional Info -->
+                    <div class="pt-6 border-t border-gray-200 dark:border-gray-800">
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-shipping-fast text-primary-500"></i>
+                                <span>Free shipping</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-undo-alt text-primary-500"></i>
+                                <span>30-day returns</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-shield-alt text-primary-500"></i>
+                                <span>2-year warranty</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-headset text-primary-500"></i>
+                                <span>24/7 support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Sticky Mobile CTA Bar -->
+        <div id="mobile-cta-bar" class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 p-4 transform translate-y-full transition-transform duration-300 lg:hidden z-40 shadow-lg">
+            <div class="container mx-auto flex items-center justify-between">
+                <div>
+                    <div class="text-lg font-bold text-primary-600 dark:text-primary-400">$249.99</div>
+                    <div class="text-xs text-gray-500 dark:text-gray-400 line-through">$299.99</div>
+                </div>
+                <button class="add-to-cart-btn-mobile py-3 px-6 bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center space-x-2">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Add to Cart</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden transition-opacity duration-300">
+        <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden max-w-2xl w-full mx-4">
+            <div class="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Product Video</h3>
+                <button id="close-video" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="aspect-video bg-gray-900 flex items-center justify-center">
+                <div class="text-white text-center">
+                    <i class="fas fa-play-circle text-6xl mb-4 opacity-70"></i>
+                    <p class="text-lg">Product demonstration video</p>
+                    <p class="text-sm opacity-70 mt-2">(This would be an embedded video player in a real implementation)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate loading delay
+            setTimeout(() => {
+                document.getElementById('skeleton-loader').classList.add('hidden');
+                document.getElementById('product-content').classList.remove('hidden');
+                document.getElementById('product-content').classList.add('animate-fade-in');
+                
+                // Initialize components after content is loaded
+                initializeProductPage();
+            }, 1500);
+
+            function initializeProductPage() {
+                // Dark Mode Toggle
+                const darkModeToggle = document.getElementById('dark-mode-toggle');
+                const icon = darkModeToggle.querySelector('i');
+                
+                darkModeToggle.addEventListener('click', () => {
+                    document.documentElement.classList.toggle('dark');
+                    if (document.documentElement.classList.contains('dark')) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                        icon.classList.remove('text-gray-600');
+                        icon.classList.add('text-yellow-400');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                        icon.classList.remove('text-yellow-400');
+                        icon.classList.add('text-gray-600');
+                    }
+                });
+
+                // Image Gallery
+                const mainImage = document.getElementById('main-product-image');
+                const thumbnailButtons = document.querySelectorAll('.thumbnail-btn');
+                const mediaButton = document.querySelector('.media-btn');
+                
+                thumbnailButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        // Update main image
+                        const newImageSrc = button.getAttribute('data-image');
+                        mainImage.src = newImageSrc;
+                        
+                        // Update active state
+                        thumbnailButtons.forEach(btn => {
+                            btn.classList.remove('border-primary-500');
+                            btn.classList.add('border-transparent');
+                        });
+                        button.classList.remove('border-transparent');
+                        button.classList.add('border-primary-500');
+                    });
+                });
+
+                // Video Modal
+                mediaButton.addEventListener('click', () => {
+                    document.getElementById('video-modal').classList.remove('hidden');
+                });
+                
+                document.getElementById('close-video').addEventListener('click', () => {
+                    document.getElementById('video-modal').classList.add('hidden');
+                });
+
+                // Image Zoom Effect
+                const zoomContainer = document.getElementById('image-zoom-container');
+                let isZoomed = false;
+                
+                zoomContainer.addEventListener('click', () => {
+                    if (isZoomed) {
+                        mainImage.style.transform = 'scale(1)';
+                        mainImage.style.cursor = 'zoom-in';
+                    } else {
+                        mainImage.style.transform = 'scale(1.5)';
+                        mainImage.style.cursor = 'zoom-out';
+                    }
+                    isZoomed = !isZoomed;
+                });
+
+                // Color Swatches
+                const colorSwatches = document.querySelectorAll('.color-swatch');
+                colorSwatches.forEach(swatch => {
+                    swatch.addEventListener('click', () => {
+                        colorSwatches.forEach(s => {
+                            s.classList.remove('ring-primary-500');
+                            s.classList.add('ring-transparent');
+                        });
+                        swatch.classList.remove('ring-transparent');
+                        swatch.classList.add('ring-primary-500');
+                    });
+                });
+
+                // Size Options
+                const sizeOptions = document.querySelectorAll('.size-option');
+                sizeOptions.forEach(option => {
+                    option.addEventListener('click', () => {
+                        sizeOptions.forEach(o => {
+                            o.classList.remove('bg-primary-500', 'text-white');
+                            o.classList.add('hover:bg-gray-100', 'dark:hover:bg-gray-800');
+                        });
+                        option.classList.add('bg-primary-500', 'text-white');
+                        option.classList.remove('hover:bg-gray-100', 'dark:hover:bg-gray-800');
+                    });
+                });
+
+                // Quantity Selector
+                const quantityInput = document.getElementById('quantity');
+                const decreaseBtn = document.getElementById('decrease-qty');
+                const increaseBtn = document.getElementById('increase-qty');
+                
+                decreaseBtn.addEventListener('click', () => {
+                    let value = parseInt(quantityInput.value);
+                    if (value > 1) {
+                        quantityInput.value = value - 1;
+                    }
+                });
+                
+                increaseBtn.addEventListener('click', () => {
+                    let value = parseInt(quantityInput.value);
+                    if (value < 10) {
+                        quantityInput.value = value + 1;
+                    }
+                });
+
+                // Add to Cart Animation
+                const addToCartButtons = document.querySelectorAll('.add-to-cart-btn, .add-to-cart-btn-mobile');
+                addToCartButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        button.innerHTML = '<i class="fas fa-check"></i><span>Added to Cart</span>';
+                        button.classList.remove('bg-primary-500', 'hover:bg-primary-600');
+                        button.classList.add('bg-green-500', 'hover:bg-green-600');
+                        
+                        setTimeout(() => {
+                            button.innerHTML = '<i class="fas fa-shopping-cart"></i><span>Add to Cart</span>';
+                            button.classList.remove('bg-green-500', 'hover:bg-green-600');
+                            button.classList.add('bg-primary-500', 'hover:bg-primary-600');
+                        }, 2000);
+                    });
+                });
+
+                // Sticky Mobile CTA Bar
+                const mobileCtaBar = document.getElementById('mobile-cta-bar');
+                const productTitle = document.querySelector('h1');
+                
+                function checkScroll() {
+                    if (window.innerWidth < 1024) { // Only for mobile
+                        const titleRect = productTitle.getBoundingClientRect();
+                        if (titleRect.bottom < 0) {
+                            mobileCtaBar.classList.remove('translate-y-full');
+                            mobileCtaBar.classList.add('translate-y-0');
+                        } else {
+                            mobileCtaBar.classList.add('translate-y-full');
+                            mobileCtaBar.classList.remove('translate-y-0');
+                        }
+                    } else {
+                        mobileCtaBar.classList.add('translate-y-full');
+                    }
+                }
+                
+                window.addEventListener('scroll', checkScroll);
+                window.addEventListener('resize', checkScroll);
+            }
+        });
+    </script>
+</body>
+</html>
