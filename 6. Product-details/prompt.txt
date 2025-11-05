@@ -1,0 +1,61 @@
+Create a modern, responsive, professional, cutting-edge and highly interactive mockup of a Product Details Page (PDP) section using HTML, Tailwind CSS (for all styling and responsiveness), and JavaScript.
+
+🎯 Core Requirements & Features
+Styling Framework:
+
+MUST USE: Tailwind CSS for all utility classes, styling, and responsive breakpoints. Assume a standard Tailwind setup with Dark Mode enabled (class strategy).
+
+Layout & Responsiveness:
+
+Desktop Layout (lg:): Two-column grid (Image/Media left, Details/Form right).
+
+Mobile Layout: Stacked, fluid layout.
+
+Fully Responsive: Fluid adaptation using Tailwind's responsive prefixes.
+
+Product Media Section (Left Column):
+
+Image Gallery/Slider: A visually engaging image slider/carousel (JS required) with thumbnail navigation.
+
+Product Image Zoom/Magnify Effect: Implement a smooth zoom or magnify effect on hover/activation of the main image.
+
+Modern Media Integration (NEW): Include a placeholder media slot in the gallery for a Product Video Player or a 360° Product Spin Viewer, with JS logic to switch the main view seamlessly.
+
+Product Details & Interaction (Right Column):
+
+Dynamic Attributes: Style selectors using Tailwind:
+
+Color Swatches: Clickable circles/squares with an emphasized active state ring (e.g., ring-2 ring-offset-2).
+
+Size/Dropdown Selector: Styled button-group or dropdown with clear selected state.
+
+Quantity Selector: Input field with clean '+' and '-' icon buttons.
+
+Action Buttons: Prominent "Add to Cart" and secondary "Buy Now" buttons with hover/focus animations.
+
+Sticky Mobile CTA Bar (NEW): On mobile/small screens, implement a sticky footer bar containing the price and main "Add to Cart" button. Use JavaScript to make it slide-in smoothly when the user scrolls past the main product title area and hide it on desktop.
+
+Theming, Animation & Performance:
+
+Dark/Light Mode: Implement a functional Dark Mode toggle button. All styling must use Tailwind's dark: prefix for full theming across all elements.
+
+High Animation/Interactive Animation: Use Tailwind's transition, duration, and transform utilities (e.g., transition-all, hover:scale-105) and JavaScript for engaging transitions.
+
+Skeleton Loading State (NEW): Implement a initial, temporary Skeleton Loading State that mimics the PDP layout. Use Tailwind's animate-pulse utility for a subtle shimmer effect. The JavaScript should simulate a 1-2 second load delay before revealing the actual product content.
+
+🛠️ Technical Implementation Instructions
+HTML: Provide the necessary structure using only Tailwind utility classes. Include separate sections for the Skeleton State and the Final Content.
+
+CSS: No custom CSS file needed. Assume Tailwind is linked.
+
+JavaScript: Provide the JS code for:
+
+Slider/Carousel logic.
+
+Image Zoom/Magnify effect.
+
+Dark/Light Mode toggling.
+
+Sticky Mobile CTA logic on scroll.
+
+Skeleton Loading (hiding skeleton and showing content after delay).
