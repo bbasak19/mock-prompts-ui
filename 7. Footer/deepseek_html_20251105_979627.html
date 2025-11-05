@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Footer with Dark/Light Mode</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --footer-bg: #004d40;
+            --text-color: rgba(255, 255, 255, 0.8);
+            --title-color: #ffffff;
+            --highlight-color: #a5d6a7;
+        }
+
+        .light-mode {
+            --footer-bg: #f5f5f5;
+            --text-color: rgba(0, 0, 0, 0.8);
+            --title-color: #000000;
+            --highlight-color: #004d40;
+        }
+
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--text-color);
+        }
+
+        .footer-title {
+            color: var(--title-color);
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .footer-link-text {
+            color: var(--highlight-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-800">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">Website Content</h1>
+        <p class="text-gray-600 dark:text-gray-300 text-center mb-12">This is a sample page to demonstrate the responsive footer with dark/light mode support.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow">
+                <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Sample Content</h2>
+                <p class="text-gray-600 dark:text-gray-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow">
+                <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Sample Content</h2>
+                <p class="text-gray-600 dark:text-gray-300">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow">
+                <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Sample Content</h2>
+                <p class="text-gray-600 dark:text-gray-300">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Footer Top Section -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+                <!-- Column 1: Subscribe Us -->
+                <div>
+                    <h3 class="footer-title">Subscribe Us</h3>
+                    <p class="mb-4">Stay updated with our latest news and offers.</p>
+                    <div class="relative">
+                        <input type="email" placeholder="Your email" class="w-full py-2 px-4 rounded bg-white bg-opacity-10 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-300">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-green-600 hover:bg-green-700 p-2 rounded">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Column 2: Information -->
+                <div>
+                    <h3 class="footer-title">Information</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">About Us</a></li>
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">Blog</a></li>
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">Contact</a></li>
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">FAQ</a></li>
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">Shipping Info</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Categories -->
+                <div>
+                    <h3 class="footer-title">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">Apparel</a></li>
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">Electronics</a></li>
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">Books</a></li>
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">Home & Garden</a></li>
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">Sports</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: My Account -->
+                <div>
+                    <h3 class="footer-title">My Account</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">My Orders</a></li>
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">Wishlist</a></li>
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">Sign In</a></li>
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">Track Order</a></li>
+                        <li><a href="#" class="hover:opacity-80 transition-opacity">Gift Cards</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 5: Logo & About -->
+                <div>
+                    <!-- Logo -->
+                    <div class="mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    
+                    <p class="mb-4">We are committed to providing high-quality products and excellent customer service.</p>
+                    <button class="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition-colors">
+                        <span>Shop Now</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom Section -->
+        <div class="border-t border-gray-700 border-opacity-30">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <!-- Left Column: Copyright -->
+                    <div class="mb-4 md:mb-0">
+                        <p>© 2024 Your Company Name. All rights reserved.</p>
+                    </div>
+                    
+                    <!-- Right Column: Terms and Privacy -->
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:opacity-80 transition-opacity footer-link-text">Terms of Service</a>
+                        <a href="#" class="hover:opacity-80 transition-opacity footer-link-text">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <div class="fixed bottom-4 right-4">
+        <button id="theme-toggle" class="bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 p-3 rounded-full shadow-lg hover:bg-gray-700 dark:hover:bg-gray-300 transition-colors">
+            <svg id="dark-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <svg id="light-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('dark-icon');
+        const lightIcon = document.getElementById('light-icon');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+            
+            // Update Tailwind dark mode class
+            if (document.body.classList.contains('light-mode')) {
+                document.documentElement.classList.remove('dark');
+            } else {
+                document.documentElement.classList.add('dark');
+            }
+        });
+    </script>
+</body>
+</html>

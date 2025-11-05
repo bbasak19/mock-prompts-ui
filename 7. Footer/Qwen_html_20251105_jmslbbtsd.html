@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Footer with Tailwind CSS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'footer-dark': '#004d40',
+                        'footer-light': '#e8f5e9',
+                        'footer-title': {
+                            dark: '#ffffff',
+                            light: '#004d40'
+                        },
+                        'footer-text': {
+                            dark: 'rgba(255, 255, 255, 0.8)',
+                            light: 'rgba(0, 0, 0, 0.7)'
+                        },
+                        'footer-highlight': {
+                            dark: '#a5d6a7',
+                            light: '#00796b'
+                        },
+                        'footer-input': {
+                            dark: 'rgba(255, 255, 255, 0.1)',
+                            light: '#ffffff'
+                        },
+                        'footer-input-border': {
+                            dark: 'rgba(255, 255, 255, 0.2)',
+                            light: '#c8e6c9'
+                        },
+                        'footer-button': {
+                            dark: '#00796b',
+                            light: '#81c784'
+                        },
+                        'footer-bottom': {
+                            dark: 'rgba(0, 0, 0, 0.2)',
+                            light: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .footer-bg {
+                background-color: hsl(var(--footer-bg));
+            }
+            .footer-title-color {
+                color: hsl(var(--footer-title));
+            }
+            .footer-text-color {
+                color: hsla(var(--footer-text-h), var(--footer-text-s), var(--footer-text-l), var(--footer-text-a));
+            }
+            .footer-highlight {
+                color: hsl(var(--footer-highlight));
+            }
+            .footer-input-bg {
+                background-color: hsl(var(--footer-input));
+            }
+            .footer-input-border {
+                border-color: hsl(var(--footer-input-border));
+            }
+            .footer-button-bg {
+                background-color: hsl(var(--footer-button));
+            }
+        }
+
+        :root {
+            --footer-bg: 0 0% 0%; /* Will be overridden */
+            --footer-title: 0 0% 100%;
+            --footer-text-h: 0;
+            --footer-text-s: 0%;
+            --footer-text-l: 100%;
+            --footer-text-a: 0.8;
+            --footer-highlight: 150 50% 70%;
+            --footer-input: 0 0% 100%;
+            --footer-input-border: 0 0% 90%;
+            --footer-button: 160 60% 30%;
+        }
+
+        .light-mode {
+            --footer-bg: 150 30% 95%;
+            --footer-title: 160 70% 20%;
+            --footer-text-h: 160;
+            --footer-text-s: 50%;
+            --footer-text-l: 20%;
+            --footer-text-a: 0.7;
+            --footer-highlight: 160 70% 30%;
+            --footer-input: 0 0% 100%;
+            --footer-input-border: 150 40% 85%;
+            --footer-button: 150 50% 65%;
+        }
+
+        .dark-mode {
+            --footer-bg: 160 100% 15%;
+            --footer-title: 0 0% 100%;
+            --footer-text-h: 0;
+            --footer-text-s: 0%;
+            --footer-text-l: 100%;
+            --footer-text-a: 0.8;
+            --footer-highlight: 150 50% 70%;
+            --footer-input: 0 0% 100%;
+            --footer-input-border: 0 0% 90%;
+            --footer-input-a: 0.1;
+            --footer-button: 160 60% 30%;
+        }
+
+        .footer-text-color {
+            color: hsla(var(--footer-text-h), var(--footer-text-s), var(--footer-text-l), var(--footer-text-a));
+        }
+
+        .footer-input-bg {
+            background-color: hsla(var(--footer-text-h), var(--footer-text-s), var(--footer-text-l), 0.1);
+        }
+
+        .footer-input-border {
+            border-color: hsla(var(--footer-text-h), var(--footer-text-s), var(--footer-text-l), 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen flex flex-col">
+    <!-- Toggle Button for Demo -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow-md transition">
+            Toggle Light/Dark Mode
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow p-4 md:p-8">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-3xl font-bold mb-4">Sample Page Content</h1>
+            <p class="mb-6">This page demonstrates a responsive footer with Tailwind CSS and theme support.</p>
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md">
+                <h2 class="text-xl font-semibold mb-3">Page Content</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-bg text-white mt-12">
+        <!-- Footer Top: 5 Columns -->
+        <div class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+                <!-- Column 1: Subscribe -->
+                <div class="xl:col-span-1">
+                    <h3 class="footer-title-color text-lg font-bold uppercase mb-6 pb-2 border-b border-opacity-20 border-white">Subscribe Us</h3>
+                    <p class="footer-text-color mb-4">
+                        Get the latest updates and offers directly to your inbox.
+                    </p>
+                    <div class="relative">
+                        <input 
+                            type="email" 
+                            placeholder="Your email address" 
+                            class="footer-input-bg w-full py-3 pl-4 pr-12 rounded-lg footer-text-color focus:outline-none focus:ring-2 focus:ring-footer-highlight placeholder-opacity-70"
+                        >
+                        <button class="footer-button-bg absolute right-1 top-1 bottom-1 w-10 rounded flex items-center justify-center" aria-label="Submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Column 2: Information -->
+                <div class="xl:col-span-1">
+                    <h3 class="footer-title-color text-lg font-bold uppercase mb-6 pb-2 border-b border-opacity-20 border-white">Information</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">About Us</a></li>
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">Blog</a></li>
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">Contact</a></li>
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">FAQ</a></li>
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3: Categories -->
+                <div class="xl:col-span-1">
+                    <h3 class="footer-title-color text-lg font-bold uppercase mb-6 pb-2 border-b border-opacity-20 border-white">Categories</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">Apparel</a></li>
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">Electronics</a></li>
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">Books</a></li>
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">Home & Kitchen</a></li>
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">Sports</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4: My Account -->
+                <div class="xl:col-span-1">
+                    <h3 class="footer-title-color text-lg font-bold uppercase mb-6 pb-2 border-b border-opacity-20 border-white">My Account</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">My Orders</a></li>
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">Wishlist</a></li>
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">Sign In</a></li>
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">Track Order</a></li>
+                        <li><a href="#" class="footer-highlight font-bold hover:underline">Help Center</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 5: Logo & About -->
+                <div class="xl:col-span-1">
+                    <!-- Logo -->
+                    <div class="mb-6">
+                        <svg class="h-10 w-auto text-white" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="120" height="40" fill="none"/>
+                            <text x="60" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="currentColor">LOGO</text>
+                        </svg>
+                    </div>
+                    
+                    <!-- About Text -->
+                    <p class="footer-text-color mb-6">
+                        We're committed to providing quality products with exceptional customer service since 2010.
+                    </p>
+                    
+                    <!-- Shop Now Button -->
+                    <a href="#" class="inline-flex items-center footer-highlight font-bold hover:underline">
+                        Shop Now
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Bottom -->
+        <div class="border-t border-opacity-20 border-white max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="footer-text-color text-sm mb-4 md:mb-0">
+                &copy; 2024 Your Company Name. All rights reserved.
+            </div>
+            <div class="flex space-x-6">
+                <a href="#" class="footer-highlight font-bold text-sm hover:underline">Terms of Service</a>
+                <a href="#" class="footer-highlight font-bold text-sm hover:underline">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            html.classList.add(savedTheme + '-mode');
+        } else {
+            // Default to dark mode
+            html.classList.add('dark-mode');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            if (html.classList.contains('dark-mode')) {
+                html.classList.replace('dark-mode', 'light-mode');
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = 'Switch to Dark Mode';
+            } else {
+                html.classList.replace('light-mode', 'dark-mode');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = 'Switch to Light Mode';
+            }
+        });
+    </script>
+</body>
+</html>
