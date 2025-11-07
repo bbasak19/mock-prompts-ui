@@ -1,0 +1,65 @@
+WEB UI HEADER SPECIFICATION: Multi-Purpose & Responsive (Tailwind CSS)
+
+GOAL: Create a simple, high-performance, sticky, multi-purpose header component. It must be theme-aware (Dark/Light Mode) and fully responsive.
+
+---
+I. CORE STRUCTURE & REQUIREMENTS
+---
+
+1.  **Layout:** Header will contain Logo (Left), Navigation (Right), and CTA Button (Far Right).
+2.  **Responsiveness:** Full responsiveness required. Navigation collapses to a hamburger menu on mobile (< lg breakpoint).
+3.  **Theming:** Must support **Dark Mode** and **Light Mode** using Tailwind's 'dark:' prefix.
+4.  **Positioning:** Header must be **sticky** (sticky top-0) with a high z-index (z-50).
+5.  **Container:** Header content must be constrained within a **centered container** (e.g., container mx-auto).
+
+---
+II. DESIGN & STYLE DETAILS
+---
+
+A. CSS Variables (Must be defined globally):
+
+    --color-primary-500: #4f46e5;  /* Example: Primary Brand Color */
+    --color-text-default: #000000; /* Light Mode Text Color */
+
+    In dark mode:
+    --color-text-default: #ffffff; /* Dark Mode Text Color */
+
+B. Color Scheme:
+
+    | Element   | Light Mode Style | Dark Mode Style |
+    |-----------|------------------|-----------------|
+    | Background| White (bg-white) | Dark Gray (bg-gray-800) |
+    | Logo      | Black Text/Icon  | White Text/Icon |
+    | Menu Text | **Black** | Light Gray (text-gray-300) |
+
+C. CTA Button:
+    * **Outline Style:** Transparent background, primary color border and text (using --color-primary-500).
+    * Use full rounded border radius.
+
+D. Also you can add light and dark svg icons button.
+
+---
+III. FUNCTIONAL REQUIREMENTS
+---
+
+1.  **Logo:**
+    * Simple structure: **[Icon] AppName**.
+    * Color must be **black** in Light Mode.
+
+2.  **Desktop Navigation:**
+    * **Labels:** Home, Products, About, Contacts.
+    * **Nesting:** Must support **multi-nested dropdown menus** (e.g., Products > Sub-Product > Feature). This must work on hover/click.
+    * menu align in right side.
+
+3.  **Mobile Navigation (Hamburger Menu):**
+    * **Trigger:** Hamburger icon appears at < lg breakpoint.
+    * **Style:** Menu must appear as an **off-canvas sidebar/drawer**.
+    * **Functionality:** The **multi-nested menu** structure must be fully functional within the off-canvas view (items expand/collapse on click).
+
+---
+IV. IMPLEMENTATION NOTES (Tailwind)
+---
+
+* Use `flex`, `justify-between` for layout.
+* Use `hidden lg:flex` for desktop navigation and `lg:hidden` for the mobile trigger.
+* Ensure full theme switching using Tailwind's `dark:` utilities.
