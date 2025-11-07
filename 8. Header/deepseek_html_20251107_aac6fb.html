@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Header with Dark Mode</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            500: '#4f46e5',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --color-primary-500: #4f46e5;
+            --color-text-default: #000000;
+        }
+
+        .dark {
+            --color-text-default: #ffffff;
+        }
+
+        /* Smooth transitions for theme switching */
+        * {
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        /* Custom scrollbar for mobile menu */
+        .mobile-menu::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .mobile-menu::-webkit-scrollbar-thumb {
+            background-color: rgba(156, 163, 175, 0.5);
+            border-radius: 3px;
+        }
+        
+        .mobile-menu::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body class="h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <!-- Header Component -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-black dark:text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                    <span class="text-xl font-bold text-black dark:text-white">AppName</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#" class="text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium">Home</a>
+                    
+                    <!-- Products Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium">
+                            Products
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        
+                        <!-- Dropdown Menu -->
+                        <div class="absolute left-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-200 dark:border-gray-700">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Product 1</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Product 2</a>
+                                
+                                <!-- Nested Dropdown -->
+                                <div class="relative group/nested">
+                                    <button class="flex justify-between items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        Product 3
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </button>
+                                    
+                                    <!-- Nested Menu -->
+                                    <div class="absolute left-full top-0 w-56 bg-white dark:bg-gray-800 rounded-md shadow-lg opacity-0 invisible group-hover/nested:opacity-100 group-hover/nested:visible transition-all duration-300 border border-gray-200 dark:border-gray-700">
+                                        <div class="py-2">
+                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Feature 1</a>
+                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Feature 2</a>
+                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Feature 3</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium">About</a>
+                    <a href="#" class="text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium">Contacts</a>
+                </nav>
+
+                <!-- Right Side Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <!-- Light Mode Icon -->
+                        <svg id="light-icon" class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                        <!-- Dark Mode Icon -->
+                        <svg id="dark-icon" class="w-5 h-5 text-blue-400 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- CTA Button -->
+                    <button class="hidden lg:block border border-primary-500 text-primary-500 dark:text-primary-400 dark:border-primary-400 hover:bg-primary-500 hover:text-white px-4 py-2 rounded-full font-medium transition-colors duration-300">
+                        Get Started
+                    </button>
+                    
+                    <!-- Mobile Menu Toggle -->
+                    <button id="mobile-menu-toggle" class="lg:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <svg class="w-6 h-6 text-black dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 lg:hidden bg-black bg-opacity-50 opacity-0 invisible transition-opacity duration-300">
+        <div class="absolute right-0 top-0 h-full w-80 bg-white dark:bg-gray-800 shadow-xl transform translate-x-full transition-transform duration-300 mobile-menu overflow-y-auto">
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-black dark:text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                    <span class="text-xl font-bold text-black dark:text-white">AppName</span>
+                </div>
+                <button id="mobile-menu-close" class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <svg class="w-6 h-6 text-black dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <nav class="p-4">
+                <a href="#" class="block py-3 text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium border-b border-gray-100 dark:border-gray-700">Home</a>
+                
+                <!-- Products Accordion -->
+                <div class="border-b border-gray-100 dark:border-gray-700">
+                    <button class="flex justify-between items-center w-full py-3 text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium">
+                        Products
+                        <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <div class="pl-4 hidden">
+                        <a href="#" class="block py-2 text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400">Product 1</a>
+                        <a href="#" class="block py-2 text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400">Product 2</a>
+                        
+                        <!-- Nested Accordion -->
+                        <div>
+                            <button class="flex justify-between items-center w-full py-2 text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400">
+                                Product 3
+                                <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            
+                            <div class="pl-4 hidden">
+                                <a href="#" class="block py-2 text-gray-500 dark:text-gray-500 hover:text-primary-500 dark:hover:text-primary-400">Feature 1</a>
+                                <a href="#" class="block py-2 text-gray-500 dark:text-gray-500 hover:text-primary-500 dark:hover:text-primary-400">Feature 2</a>
+                                <a href="#" class="block py-2 text-gray-500 dark:text-gray-500 hover:text-primary-500 dark:hover:text-primary-400">Feature 3</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="#" class="block py-3 text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium border-b border-gray-100 dark:border-gray-700">About</a>
+                <a href="#" class="block py-3 text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium border-b border-gray-100 dark:border-gray-700">Contacts</a>
+                
+                <!-- Mobile CTA Button -->
+                <button class="w-full mt-6 border border-primary-500 text-primary-500 dark:text-primary-400 dark:border-primary-400 hover:bg-primary-500 hover:text-white px-4 py-3 rounded-full font-medium transition-colors duration-300">
+                    Get Started
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content (for demonstration) -->
+    <main class="container mx-auto px-4 py-12">
+        <h1 class="text-3xl font-bold mb-6">Responsive Header Demo</h1>
+        <p class="mb-4">This is a demonstration of a fully responsive, theme-aware header component built with Tailwind CSS.</p>
+        <p class="mb-4">Features include:</p>
+        <ul class="list-disc pl-6 mb-6">
+            <li>Sticky positioning with high z-index</li>
+            <li>Dark/Light mode support with toggle button</li>
+            <li>Responsive design with mobile hamburger menu</li>
+            <li>Multi-level nested dropdown menus</li>
+            <li>CTA button with outline styling</li>
+        </ul>
+        <p>Resize your browser to see the responsive behavior, or toggle the theme using the button in the header.</p>
+    </main>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const lightIcon = document.getElementById('light-icon');
+        const darkIcon = document.getElementById('dark-icon');
+        
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.add('hidden');
+            darkIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            lightIcon.classList.remove('hidden');
+            darkIcon.classList.add('hidden');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                lightIcon.classList.add('hidden');
+                darkIcon.classList.remove('hidden');
+            }
+        });
+        
+        // Mobile Menu Functionality
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuPanel = mobileMenu.querySelector('.mobile-menu');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenu.classList.remove('invisible');
+            mobileMenu.classList.add('visible');
+            setTimeout(() => {
+                mobileMenu.classList.remove('opacity-0');
+                mobileMenuPanel.classList.remove('translate-x-full');
+            }, 10);
+        });
+        
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.add('opacity-0');
+            mobileMenuPanel.classList.add('translate-x-full');
+            setTimeout(() => {
+                mobileMenu.classList.remove('visible');
+                mobileMenu.classList.add('invisible');
+            }, 300);
+        });
+        
+        // Close mobile menu when clicking outside
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                mobileMenu.classList.add('opacity-0');
+                mobileMenuPanel.classList.add('translate-x-full');
+                setTimeout(() => {
+                    mobileMenu.classList.remove('visible');
+                    mobileMenu.classList.add('invisible');
+                }, 300);
+            }
+        });
+        
+        // Mobile Accordion Functionality
+        const mobileAccordionButtons = document.querySelectorAll('#mobile-menu button');
+        
+        mobileAccordionButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                // Don't trigger if it's the main menu close button
+                if (button.id === 'mobile-menu-close') return;
+                
+                const content = button.nextElementSibling;
+                const isExpanded = !content.classList.contains('hidden');
+                
+                // Close all other accordions at the same level
+                const parentItem = button.closest('div');
+                const siblings = parentItem.parentElement.children;
+                
+                Array.from(siblings).forEach(sibling => {
+                    if (sibling !== parentItem) {
+                        const siblingContent = sibling.querySelector('div');
+                        if (siblingContent && !siblingContent.classList.contains('hidden')) {
+                            siblingContent.classList.add('hidden');
+                            const siblingIcon = sibling.querySelector('svg');
+                            if (siblingIcon) {
+                                siblingIcon.style.transform = 'rotate(0deg)';
+                            }
+                        }
+                    }
+                });
+                
+                // Toggle current accordion
+                if (isExpanded) {
+                    content.classList.add('hidden');
+                    const icon = button.querySelector('svg');
+                    if (icon) {
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                } else {
+                    content.classList.remove('hidden');
+                    const icon = button.querySelector('svg');
+                    if (icon) {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                }
+                
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>

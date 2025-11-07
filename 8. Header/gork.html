@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Sticky Header</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              500: 'var(--color-primary-500)',
+            },
+            textdefault: 'var(--color-text-default)',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    :root {
+      --color-primary-500: #4f46e5;
+      --color-text-default: #000000;
+    }
+    .dark {
+      --color-text-default: #ffffff;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-textdefault transition-colors duration-300">
+
+  <!-- Sticky Header -->
+  <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md transition-colors duration-300">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+
+        <!-- Logo -->
+        <div class="flex items-center space-x-2">
+          <a href="#" class="flex items-center space-x-2 text-xl font-bold text-black dark:text-white">
+            <svg class="w-8 h-8 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            <span>AppName</span>
+          </a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center space-x-8">
+          <a href="#" class="text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition">Home</a>
+
+          <!-- Dropdown: Products -->
+          <div class="relative group">
+            <button class="text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition flex items-center">
+              Products
+              <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="absolute left-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
+              <a href="#" class="block px-4 py-2 text-sm text-black dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Sub-Product 1</a>
+              <div class="relative group/sub">
+                <button class="w-full text-left px-4 py-2 text-sm text-black dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center">
+                  Sub-Product 2
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </button>
+                <div class="absolute left-full top-0 mt-0 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
+                  <a href="#" class="block px-4 py-2 text-sm text-black dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Feature A</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-black dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Feature B</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-black dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Feature C</a>
+                </div>
+              </div>
+              <a href="#" class="block px-4 py-2 text-sm text-black dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Sub-Product 3</a>
+            </div>
+          </div>
+
+          <a href="#" class="text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition">About</a>
+          <a href="#" class="text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition">Contacts</a>
+        </nav>
+
+        <!-- CTA Button + Theme Toggle -->
+        <div class="flex items-center space-x-4">
+          <button class="hidden lg:block border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white px-5 py-2 rounded-full transition whitespace-nowrap">
+            Get Started
+          </button>
+
+          <!-- Theme Toggle (Desktop & Mobile) -->
+          <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+            <svg id="sun" class="w-5 h-5 hidden dark:block text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.485-11.515l-.707.707M5.636 18.364l-.707.707m13.536 0l-.707-.707M5.636 5.636l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z"/>
+            </svg>
+            <svg id="moon" class="w-5 h-5 block dark:hidden text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+          </button>
+
+          <!-- Mobile Menu Trigger -->
+          <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+            <svg class="w-6 h-6 text-black dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Off-Canvas Sidebar -->
+    <div id="mobile-sidebar" class="fixed inset-y-0 right-0 w-80 bg-white dark:bg-gray-800 shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out z-50 lg:hidden overflow-y-auto">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-8">
+          <a href="#" class="flex items-center space-x-2 text-xl font-bold text-black dark:text-white">
+            <svg class="w-8 h-8 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            <span>AppName</span>
+          </a>
+          <button id="close-sidebar" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+            <svg class="w-6 h-6 text-black dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav class="space-y-1">
+          <a href="#" class="block py-2 text-black dark:text-gray-300 hover:text-primary-500">Home</a>
+
+          <!-- Mobile Nested: Products -->
+          <div>
+            <button class="w-full text-left py-2 text-black dark:text-gray-300 hover:text-primary-500 flex justify-between items-center">
+              Products
+              <svg class="w-4 h-4 transition-transform" id="mobile-prod-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div id="mobile-prod-submenu" class="pl-4 space-y-1 hidden">
+              <a href="#" class="block py-2 text-sm text-black dark:text-gray-300 hover:text-primary-500">Sub-Product 1</a>
+              
+              <div>
+                <button class="w-full text-left py-2 text-sm text-black dark:text-gray-300 hover:text-primary-500 flex justify-between items-center">
+                  Sub-Product 2
+                  <svg class="w-4 h-4 transition-transform" id="mobile-sub-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </button>
+                <div id="mobile-sub-submenu" class="pl-4 space-y-1 hidden">
+                  <a href="#" class="block py-2 text-sm text-black dark:text-gray-300 hover:text-primary-500">Feature A</a>
+                  <a href="#" class="block py-2 text-sm text-black dark:text-gray-300 hover:text-primary-500">Feature B</a>
+                  <a href="#" class="block py-2 text-sm text-black dark:text-gray-300 hover:text-primary-500">Feature C</a>
+                </div>
+              </div>
+              
+              <a href="#" class="block py-2 text-sm text-black dark:text-gray-300 hover:text-primary-500">Sub-Product 3</a>
+            </div>
+          </div>
+
+          <a href="#" class="block py-2 text-black dark:text-gray-300 hover:text-primary-500">About</a>
+          <a href="#" class="block py-2 text-black dark:text-gray-300 hover:text-primary-500">Contacts</a>
+        </nav>
+
+        <!-- Mobile CTA -->
+        <button class="mt-8 w-full border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white py-3 rounded-full transition">
+          Get Started
+        </button>
+      </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 lg:hidden"></div>
+  </header>
+
+  <!-- Demo Content -->
+  <main class="container mx-auto px-4 py-16">
+    <h1 class="text-4xl font-bold text-center mb-8">Sticky Multi-Purpose Header</h1>
+    <p class="text-center text-gray-600 dark:text-gray-400 mb-12">Fully responsive • Dark/Light Mode • Nested Dropdowns • Off-canvas Mobile Menu</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">Feature 1</div>
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">Feature 2</div>
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">Feature 3</div>
+    </div>
+  </main>
+
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const sun = document.getElementById('sun');
+    const moon = document.getElementById('moon');
+
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    });
+
+    // Persist theme
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    // Mobile Menu
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const sidebar = document.getElementById('mobile-sidebar');
+    const closeBtn = document.getElementById('close-sidebar');
+    const overlay = document.getElementById('overlay');
+
+    mobileBtn.addEventListener('click', () => {
+      sidebar.classList.remove('translate-x-full');
+      overlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+
+    const closeSidebar = () => {
+      sidebar.classList.add('translate-x-full');
+      overlay.classList.add('hidden');
+      document.body.style.overflow = '';
+    };
+
+    closeBtn.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    // Mobile Nested Menu Toggles
+    document.querySelector('#mobile-prod-submenu').previousElementSibling.addEventListener('click', function() {
+      const submenu = this.nextElementSibling;
+      const arrow = document.getElementById('mobile-prod-arrow');
+      submenu.classList.toggle('hidden');
+      arrow.classList.toggle('rotate-180');
+    });
+
+    document.querySelector('#mobile-sub-submenu').previousElementSibling.addEventListener('click', function() {
+      const submenu = this.nextElementSibling;
+      const arrow = document.getElementById('mobile-sub-arrow');
+      submenu.classList.toggle('hidden');
+      arrow.classList.toggle('rotate-180');
+    });
+  </script>
+</body>
+</html>

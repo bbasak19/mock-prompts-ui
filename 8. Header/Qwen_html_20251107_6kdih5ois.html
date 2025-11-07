@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Sticky Header</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            500: 'var(--color-primary-500)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            :root {
+                --color-primary-500: #4f46e5;
+                --color-text-default: #000000;
+            }
+            
+            .dark {
+                --color-text-default: #ffffff;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300 min-h-screen">
+    <!-- Header Component -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md dark:shadow-xl transition-shadow duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <div class="flex items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                        <span class="text-xl font-bold text-black dark:text-white">AppName</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#" class="nav-link text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-colors">
+                        Home
+                    </a>
+                    
+                    <div class="relative group">
+                        <button class="nav-link text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-colors flex items-center">
+                            Products <i class="ml-1 fa fa-chevron-down text-xs"></i>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-white dark:bg-gray-700 shadow-lg rounded-md py-2 w-48 z-50">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">Feature A</a>
+                            <div class="relative group/sub">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 flex justify-between items-center">
+                                    Feature B <i class="fa fa-chevron-right text-xs"></i>
+                                </a>
+                                <div class="absolute left-full top-0 hidden group/sub-hover:block bg-white dark:bg-gray-700 shadow-lg rounded-md py-2 w-48 ml-1">
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">Sub-Feature 1</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">Sub-Feature 2</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="nav-link text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-colors">
+                        About
+                    </a>
+                    
+                    <a href="#" class="nav-link text-black dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-colors">
+                        Contact
+                    </a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden lg:block">
+                    <button class="px-4 py-2 border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white rounded-full transition-colors duration-300">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-700 dark:text-gray-300 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Off-Canvas Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50">
+        <div class="fixed top-0 right-0 h-full w-64 bg-white dark:bg-gray-800 shadow-xl transform transition-transform duration-300 translate-x-full">
+            <div class="p-5 flex justify-end">
+                <button id="close-mobile-menu" class="text-gray-500 dark:text-gray-400">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="px-5 py-3 border-t border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center space-x-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    <span class="text-lg font-bold text-black dark:text-white">AppName</span>
+                </div>
+            </div>
+            
+            <nav class="py-4">
+                <div class="px-5 py-2">
+                    <a href="#" class="block py-3 text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-500 border-b border-gray-100 dark:border-gray-700">Home</a>
+                    
+                    <div class="relative">
+                        <button id="mobile-products-btn" class="w-full flex justify-between items-center py-3 text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-500 border-b border-gray-100 dark:border-gray-700">
+                            <span>Products</span>
+                            <i class="fa fa-chevron-down text-sm"></i>
+                        </button>
+                        
+                        <div id="mobile-products-menu" class="hidden pl-5 border-l border-gray-200 dark:border-gray-700">
+                            <a href="#" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500">Feature A</a>
+                            
+                            <div class="relative">
+                                <button id="mobile-feature-b-btn" class="w-full flex justify-between items-center py-2 text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500">
+                                    <span>Feature B</span>
+                                    <i class="fa fa-chevron-down text-sm"></i>
+                                </button>
+                                
+                                <div id="mobile-feature-b-menu" class="hidden pl-5 border-l border-gray-200 dark:border-gray-700">
+                                    <a href="#" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500">Sub-Feature 1</a>
+                                    <a href="#" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500">Sub-Feature 2</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="block py-3 text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-500 border-b border-gray-100 dark:border-gray-700">About</a>
+                    <a href="#" class="block py-3 text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-500 border-b border-gray-100 dark:border-gray-700">Contact</a>
+                </div>
+                
+                <div class="px-5 py-6">
+                    <button class="w-full py-3 border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white rounded-full transition-colors duration-300">
+                        Get Started
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Theme Toggle Button -->
+    <div class="fixed bottom-6 right-6 z-40">
+        <button id="theme-toggle" class="p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <i id="theme-icon" class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- Demo Content -->
+    <div class="container mx-auto px-4 py-12">
+        <h1 class="text-3xl font-bold mb-6">Responsive Sticky Header</h1>
+        
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">Features:</h2>
+            <ul class="list-disc pl-6 space-y-2">
+                <li>Sticky header with smooth shadow effect</li>
+                <li>Dark/light mode toggle</li>
+                <li>Responsive design with mobile hamburger menu</li>
+                <li>Multi-level dropdown navigation</li>
+                <li>Off-canvas mobile menu with nested items</li>
+                <li>Custom CSS variables for easy theming</li>
+            </ul>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 class="text-lg font-semibold mb-3">Desktop View</h3>
+                <p>The header displays the logo, navigation links, and CTA button in a single row. Hover over "Products" to see the dropdown menu.</p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 class="text-lg font-semibold mb-3">Mobile View</h3>
+                <p>On smaller screens, the navigation collapses into a hamburger menu. Click the menu icon to open the off-canvas navigation.</p>
+            </div>
+        </div>
+        
+        <div class="mt-12 h-96 bg-gradient-to-r from-primary-500 to-indigo-600 rounded-xl flex items-center justify-center text-white">
+            <div class="text-center">
+                <h2 class="text-2xl font-bold mb-2">Scroll Down</h2>
+                <p>The header will stick to the top when you scroll</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        
+        // Check for saved theme preference or respect OS preference
+        if (localStorage.getItem('theme') === 'dark' || 
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        });
+        
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileProductsBtn = document.getElementById('mobile-products-btn');
+        const mobileProductsMenu = document.getElementById('mobile-products-menu');
+        const mobileFeatureBBtn = document.getElementById('mobile-feature-b-btn');
+        const mobileFeatureBMenu = document.getElementById('mobile-feature-b-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            setTimeout(() => {
+                document.querySelector('#mobile-menu .fixed').classList.remove('translate-x-full');
+            }, 10);
+        });
+        
+        closeMobileMenu.addEventListener('click', () => {
+            document.querySelector('#mobile-menu .fixed').classList.add('translate-x-full');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+            }, 300);
+        });
+        
+        mobileProductsBtn.addEventListener('click', () => {
+            mobileProductsMenu.classList.toggle('hidden');
+            const icon = mobileProductsBtn.querySelector('i');
+            if (mobileProductsMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            }
+        });
+        
+        mobileFeatureBBtn.addEventListener('click', () => {
+            mobileFeatureBMenu.classList.toggle('hidden');
+            const icon = mobileFeatureBBtn.querySelector('i');
+            if (mobileFeatureBMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            }
+        });
+        
+        // Close mobile menu when clicking outside
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                closeMobileMenu.click();
+            }
+        });
+    </script>
+</body>
+</html>
