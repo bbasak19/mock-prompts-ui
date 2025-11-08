@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Uploader</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #6D28D9;
+            --color-secondary: #F3F4F6;
+            --color-text: #1F2937;
+            --color-border-dash: #D1D5DB;
+            --color-success: #10B981;
+            --color-error: #EF4444;
+        }
+
+        .dark {
+            --color-primary: #A78BFA;
+            --color-secondary: #1F2937;
+            --color-text: #F3F4F6;
+            --color-border-dash: #4B5563;
+        }
+
+        body {
+            background-color: var(--color-secondary);
+            color: var(--color-text);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        #drop-area {
+            border-color: var(--color-border-dash);
+            transition: border-color 0.3s;
+        }
+
+        #drop-area.dragover {
+            border-color: var(--color-primary);
+            background-color: rgba(109, 40, 217, 0.05);
+        }
+
+        .dark #drop-area.dragover {
+            background-color: rgba(167, 139, 250, 0.05);
+        }
+
+        .upload-btn {
+            background-color: var(--color-primary);
+        }
+
+        .upload-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .success-animation {
+            animation: success-pulse 2s infinite;
+        }
+
+        @keyframes success-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .file-item {
+            transition: all 0.3s;
+        }
+
+        .file-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div class="container mx-auto px-4 py-8 max-w-3xl">
+        <!-- Header with Dark Mode Toggle -->
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 dark:text-white">File Uploader</h1>
+            <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+        </div>
+
+        <!-- Drag and Drop Area -->
+        <div id="drop-area" class="border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-300">
+            <div class="flex flex-col items-center justify-center space-y-4">
+                <i class="fas fa-cloud-upload-alt text-5xl" style="color: var(--color-primary);"></i>
+                <p class="text-xl font-semibold">Drag and drop your images and files here</p>
+                <p class="text-gray-500 dark:text-gray-400">Supported: JPG, PNG, PDF, Max 10MB</p>
+                <div class="flex items-center my-4">
+                    <div class="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
+                    <span class="mx-4 text-gray-500 dark:text-gray-400">OR</span>
+                    <div class="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
+                </div>
+                <button id="browse-btn" class="px-6 py-3 rounded-full text-white font-medium upload-btn transition-colors">
+                    Browse files
+                </button>
+                <input type="file" id="file-input" class="hidden" multiple accept="image/*,application/pdf">
+            </div>
+        </div>
+
+        <!-- Uploaded File List -->
+        <div id="file-list-container" class="mt-8 hidden">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Selected Files</h2>
+            <div id="file-list" class="space-y-4">
+                <!-- File items will be added here dynamically -->
+            </div>
+        </div>
+
+        <!-- Upload Button -->
+        <div class="mt-8 text-center">
+            <button id="upload-btn" class="px-8 py-3 rounded-full text-white font-medium upload-btn transition-colors" disabled>
+                Start Upload (0 files)
+            </button>
+        </div>
+
+        <!-- Status Message Area -->
+        <div id="status-message" class="mt-6 hidden p-4 rounded-lg text-center">
+            <div class="flex items-center justify-center space-x-2">
+                <i id="status-icon" class="text-2xl"></i>
+                <p id="status-text" class="text-lg font-medium"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let uploadedFiles = [];
+        let isDarkMode = false;
+
+        // DOM elements
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('file-input');
+        const browseBtn = document.getElementById('browse-btn');
+        const fileList = document.getElementById('file-list');
+        const fileListContainer = document.getElementById('file-list-container');
+        const uploadBtn = document.getElementById('upload-btn');
+        const statusMessage = document.getElementById('status-message');
+        const statusIcon = document.getElementById('status-icon');
+        const statusText = document.getElementById('status-text');
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        // Theme toggle functionality
+        themeToggle.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            document.documentElement.classList.toggle('dark');
+            themeIcon.classList.toggle('fa-moon');
+            themeIcon.classList.toggle('fa-sun');
+        });
+
+        // Event listeners for drag and drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight() {
+            dropArea.classList.add('dragover');
+        }
+
+        function unhighlight() {
+            dropArea.classList.remove('dragover');
+        }
+
+        dropArea.addEventListener('drop', handleDrop, false);
+        browseBtn.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', handleFileSelect);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+
+        function handleFileSelect() {
+            const files = fileInput.files;
+            handleFiles(files);
+        }
+
+        function handleFiles(files) {
+            if (files.length === 0) return;
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                // Check file size (max 10MB)
+                if (file.size > 10 * 1024 * 1024) {
+                    showStatus(`File "${file.name}" is too large. Max size is 10MB.`, 'error');
+                    continue;
+                }
+                
+                // Check file type
+                const fileType = file.type;
+                if (!fileType.startsWith('image/') && fileType !== 'application/pdf') {
+                    showStatus(`File type "${fileType}" is not supported.`, 'error');
+                    continue;
+                }
+                
+                addFileToList(file);
+            }
+            
+            updateUploadButton();
+        }
+
+        function addFileToList(file) {
+            // Check if file already exists
+            if (uploadedFiles.some(f => f.name === file.name && f.size === file.size)) {
+                return;
+            }
+            
+            uploadedFiles.push(file);
+            
+            // Create file item element
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm';
+            fileItem.dataset.filename = file.name;
+            
+            // Format file size
+            const fileSize = formatFileSize(file.size);
+            
+            // Get file extension
+            const fileExtension = file.name.split('.').pop().toUpperCase();
+            
+            // Create preview
+            const previewDiv = document.createElement('div');
+            previewDiv.className = 'w-20 h-16 flex-shrink-0 mr-4 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center overflow-hidden';
+            
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'w-full h-full object-cover';
+                    previewDiv.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                // For PDF files, show a PDF icon
+                const pdfIcon = document.createElement('i');
+                pdfIcon.className = 'fas fa-file-pdf text-red-500 text-2xl';
+                previewDiv.appendChild(pdfIcon);
+            }
+            
+            // Create file info
+            const fileInfo = document.createElement('div');
+            fileInfo.className = 'flex-grow';
+            
+            const fileName = document.createElement('p');
+            fileName.className = 'font-medium text-gray-800 dark:text-white truncate';
+            fileName.textContent = file.name;
+            
+            const fileMeta = document.createElement('p');
+            fileMeta.className = 'text-sm text-gray-500 dark:text-gray-400';
+            fileMeta.textContent = `${file.type} · ${fileSize} · ${fileExtension}`;
+            
+            fileInfo.appendChild(fileName);
+            fileInfo.appendChild(fileMeta);
+            
+            // Create remove button
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'ml-4 text-red-500 hover:text-red-700 transition-colors';
+            removeBtn.innerHTML = '<i class="fas fa-trash"></i>';
+            removeBtn.addEventListener('click', () => removeFile(file.name, fileItem));
+            
+            // Assemble file item
+            fileItem.appendChild(previewDiv);
+            fileItem.appendChild(fileInfo);
+            fileItem.appendChild(removeBtn);
+            
+            // Add to file list
+            fileList.appendChild(fileItem);
+            
+            // Show file list container if it's hidden
+            fileListContainer.classList.remove('hidden');
+        }
+
+        function removeFile(filename, fileItem) {
+            // Remove from array
+            uploadedFiles = uploadedFiles.filter(file => file.name !== filename);
+            
+            // Remove from DOM
+            fileItem.remove();
+            
+            // Hide file list container if no files
+            if (uploadedFiles.length === 0) {
+                fileListContainer.classList.add('hidden');
+            }
+            
+            updateUploadButton();
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function updateUploadButton() {
+            const count = uploadedFiles.length;
+            uploadBtn.textContent = `Start Upload (${count} file${count !== 1 ? 's' : ''})`;
+            uploadBtn.disabled = count === 0;
+        }
+
+        function showStatus(message, type) {
+            statusMessage.classList.remove('hidden');
+            statusMessage.className = `mt-6 p-4 rounded-lg text-center ${type === 'success' ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'}`;
+            
+            statusIcon.className = type === 'success' ? 'fas fa-check-circle text-green-500 text-2xl success-animation' : 'fas fa-times-circle text-red-500 text-2xl';
+            statusText.textContent = message;
+            
+            if (type === 'success') {
+                // Auto-hide success message after 5 seconds
+                setTimeout(() => {
+                    statusMessage.classList.add('hidden');
+                }, 5000);
+            }
+        }
+
+        // Upload functionality
+        uploadBtn.addEventListener('click', handleUpload);
+
+        function handleUpload() {
+            if (uploadedFiles.length === 0) return;
+            
+            // Disable upload button during upload
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Uploading...';
+            
+            // Simulate API call with setTimeout
+            setTimeout(() => {
+                // In a real application, you would send the files to a server here
+                console.log('Uploading files:', uploadedFiles);
+                
+                // Show success message
+                showStatus(`Successfully uploaded ${uploadedFiles.length} file${uploadedFiles.length !== 1 ? 's' : ''}!`, 'success');
+                
+                // Reset file list
+                uploadedFiles = [];
+                fileList.innerHTML = '';
+                fileListContainer.classList.add('hidden');
+                
+                // Reset upload button
+                updateUploadButton();
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Drag & Drop Uploader</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom CSS Variables & Dark Mode */
+    :root {
+      --color-primary: #6D28D9;
+      --color-secondary: #F3F4F6;
+      --color-text: #1F2937;
+      --color-border-dash: #D1D5DB;
+      --color-success: #10B981;
+      --color-error: #EF4444;
+    }
+
+    .dark {
+      --color-primary: #A78BFA;
+      --color-secondary: #1F2937;
+      --color-text: #F3F4F6;
+      --color-border-dash: #4B5563;
+    }
+
+    body {
+      background-color: #f9fafb;
+      color: var(--color-text);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .dark body {
+      background-color: #111827;
+    }
+
+    #drop-area {
+      border: 2px dashed var(--color-border-dash);
+      background-color: var(--color-secondary);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    #drop-area.dragover {
+      border-color: var(--color-primary);
+      background-color: rgba(109, 40, 217, 0.05);
+      transform: scale(1.01);
+    }
+
+    .dark #drop-area.dragover {
+      background-color: rgba(167, 139, 250, 0.1);
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary);
+      transition: all 0.2s;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background-color: #5B21B6;
+      transform: translateY(-1px);
+    }
+
+    .dark .btn-primary:hover:not(:disabled) {
+      background-color: #8B5CF6;
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    #upload-btn {
+      min-width: 180px;
+    }
+
+    .file-preview {
+      width: 100px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      background-color: #e5e7eb;
+    }
+
+    .dark .file-preview {
+      background-color: #374151;
+    }
+
+    .default-file-icon {
+      width: 100px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #e5e7eb;
+      border-radius: 0.5rem;
+      font-size: 2rem;
+      color: #6b7280;
+    }
+
+    .dark .default-file-icon {
+      background-color: #374151;
+      color: #9ca3af;
+    }
+
+    .remove-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #FECACA;
+      color: #DC2626;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+
+    .remove-btn:hover {
+      background-color: #FCA5A5;
+      transform: scale(1.1);
+    }
+
+    .dark .remove-btn {
+      background-color: #7F1D1D;
+      color: #FECACA;
+    }
+
+    .dark .remove-btn:hover {
+      background-color: #991B1B;
+    }
+
+    #status-message {
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    .status-success {
+      color: var(--color-success);
+    }
+
+    .status-error {
+      color: var(--color-error);
+    }
+
+    .theme-toggle {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: var(--color-secondary);
+      transition: all 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background-color: #e5e7eb;
+      transform: scale(1.1);
+    }
+
+    .dark .theme-toggle:hover {
+      background-color: #374151;
+    }
+  </style>
+</head>
+<body class="min-h-screen py-12 px-4 font-sans">
+  <div class="max-w-3xl mx-auto">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-3xl font-bold text-var(--color-text)">File Uploader</h1>
+      <button id="theme-toggle" class="theme-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-var(--color-text)" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" class="moon-path hidden dark:inline" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" class="sun-path dark:hidden" />
+        </svg>
+      </button>
+    </div>
+
+    <div id="drop-area" class="p-12 text-center rounded-xl mb-6">
+      <input type="file" id="file-input" multiple accept="image/*,application/pdf" class="hidden" />
+      <svg class="mx-auto mb-4 w-16 h-16" fill="var(--color-primary)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
+      </svg>
+      <p class="text-xl font-semibold mb-2">Drag and drop your images and files here</p>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Supported: JPG, PNG, PDF, Max 10MB</p>
+      <div class="text-lg font-medium text-gray-500 dark:text-gray-400 mb-4">OR</div>
+      <button id="browse-btn" class="px-6 py-3 btn-primary text-white font-medium rounded-lg shadow-md">
+        Browse files
+      </button>
+    </div>
+
+    <div id="file-list" class="hidden space-y-3 mb-6"></div>
+
+    <div class="flex justify-between items-center">
+      <button id="upload-btn" class="px-6 py-3 btn-primary text-white font-medium rounded-full shadow-lg disabled:opacity-50" disabled>
+        Start Upload (0 files)
+      </button>
+      <div id="status-message" class="hidden flex items-center space-x-2 text-lg font-medium"></div>
+    </div>
+  </div>
+
+  <script>
+    // State
+    let uploadedFiles = [];
+
+    // DOM Elements
+    const dropArea = document.getElementById('drop-area');
+    const fileInput = document.getElementById('file-input');
+    const browseBtn = document.getElementById('browse-btn');
+    const fileList = document.getElementById('file-list');
+    const uploadBtn = document.getElementById('upload-btn');
+    const statusMessage = document.getElementById('status-message');
+    const themeToggle = document.getElementById('theme-toggle');
+
+    // Format file size
+    const formatFileSize = (bytes) => {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    };
+
+    // Get file extension
+    const getFileExtension = (filename) => {
+      return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2).toUpperCase();
+    };
+
+    // Get media type
+    const getMediaType = (file) => {
+      return file.type.startsWith('image/') ? 'Image' : 'PDF';
+    };
+
+    // Add file to list
+    const addFileToList = (file) => {
+      if (file.size > 10 * 1024 * 1024) {
+        alert(`File "${file.name}" exceeds 10MB limit.`);
+        return;
+      }
+
+      uploadedFiles.push(file);
+
+      const li = document.createElement('div');
+      li.className = 'flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700';
+      li.dataset.index = uploadedFiles.length - 1;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const isImage = file.type.startsWith('image/');
+        const preview = isImage
+          ? `<img src="${e.target.result}" alt="${file.name}" class="file-preview">`
+          : `<div class="default-file-icon">PDF</div>`;
+
+        li.innerHTML = `
+          <div class="flex items-center space-x-4 flex-1">
+            <div>${preview}</div>
+            <div class="flex-1 min-w-0">
+              <p class="font-medium truncate">${file.name}</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400">
+                ${getMediaType(file)} · ${formatFileSize(file.size)} · ${getFileExtension(file.name)}
+              </p>
+            </div>
+          </div>
+          <button class="remove-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </button>
+        `;
+
+        fileList.appendChild(li);
+        fileList.classList.remove('hidden');
+        updateUploadButton();
+      };
+
+      if (file.type.startsWith('image/')) {
+        reader.readAsDataURL(file);
+      } else {
+        reader.onload = () => {
+          li.innerHTML = `
+            <div class="flex items-center space-x-4 flex-1">
+              <div class="default-file-icon">PDF</div>
+              <div class="flex-1 min-w-0">
+                <p class="font-medium truncate">${file.name}</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                  ${getMediaType(file)} · ${formatFileSize(file.size)} · ${getFileExtension(file.name)}
+                </p>
+              </div>
+            </div>
+            <button class="remove-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          `;
+          fileList.appendChild(li);
+          fileList.classList.remove('hidden');
+          updateUploadButton();
+        };
+        reader.readAsDataURL(file); // Still read to trigger onload
+      }
+    };
+
+    // Remove file
+    const removeFile = (index) => {
+      uploadedFiles.splice(index, 1);
+      renderFileList();
+      updateUploadButton();
+    };
+
+    // Re-render file list
+    const renderFileList = () => {
+      fileList.innerHTML = '';
+      if (uploadedFiles.length === 0) {
+        fileList.classList.add('hidden');
+        return;
+      }
+      uploadedFiles.forEach((file, index) => {
+        addFileToList(file); // Re-use add logic
+        // Override index
+        setTimeout(() => {
+          const items = fileList.querySelectorAll('div');
+          if (items[index]) items[index].dataset.index = index;
+        }, 0);
+      });
+    };
+
+    // Update upload button
+    const updateUploadButton = () => {
+      const count = uploadedFiles.length;
+      uploadBtn.textContent = `Start Upload (${count} files)`;
+      uploadBtn.disabled = count === 0;
+    };
+
+    // Handle upload
+    const handleUpload = () => {
+      if (uploadedFiles.length === 0) return;
+
+      uploadBtn.disabled = true;
+      uploadBtn.textContent = 'Uploading...';
+
+      // Simulate upload
+      setTimeout(() => {
+        statusMessage.innerHTML = `
+          <svg class="w-6 h-6 status-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span class="status-success">Upload Complete!</span>
+        `;
+        statusMessage.classList.remove('hidden');
+
+        setTimeout(() => {
+          statusMessage.classList.add('hidden');
+          uploadedFiles = [];
+          fileList.innerHTML = '';
+          fileList.classList.add('hidden');
+          updateUploadButton();
+        }, 5000);
+      }, 2000);
+    };
+
+    // Drag & Drop Events
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropArea.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropArea.classList.add('dragover');
+      });
+    });
+
+    ['dragleave', 'dragend'].forEach(eventName => {
+      dropArea.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropArea.classList.remove('dragover');
+      });
+    });
+
+    dropArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropArea.classList.remove('dragover');
+
+      const files = e.dataTransfer.files;
+      for (let file of files) {
+        if ((file.type.startsWith('image/') || file.type === 'application/pdf')) {
+          addFileToList(file);
+        }
+      }
+    });
+
+    // File input
+    browseBtn.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', () => {
+      for (let file of fileInput.files) {
+        if ((file.type.startsWith('image/') || file.type === 'application/pdf')) {
+          addFileToList(file);
+        }
+      }
+      fileInput.value = '';
+    });
+
+    // Upload button
+    uploadBtn.addEventListener('click', handleUpload);
+
+    // Remove buttons (event delegation)
+    fileList.addEventListener('click', (e) => {
+      if (e.target.closest('.remove-btn')) {
+        const item = e.target.closest('div');
+        const index = parseInt(item.dataset.index);
+        removeFile(index);
+      }
+    });
+
+    // Theme toggle
+    themeToggle.addEventListener('click', () => {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      html.classList.toggle('dark', !isDark);
+
+      // Update icon
+      document.querySelector('.moon-path').classList.toggle('hidden', isDark);
+      document.querySelector('.moon-path').classList.toggle('inline', !isDark);
+      document.querySelector('.sun-path').classList.toggle('hidden', !isDark);
+      document.querySelector('.sun-path').classList.toggle('dark:hidden', !isDark);
+    });
+
+    // Initialize theme icon
+    const updateThemeIcon = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      document.querySelector('.moon-path').classList.toggle('hidden', !isDark);
+      document.querySelector('.moon-path').classList.toggle('inline', isDark);
+      document.querySelector('.sun-path').classList.toggle('hidden', isDark);
+    };
+    updateThemeIcon();
+  </script>
+</body>
+</html>
