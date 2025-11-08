@@ -1,0 +1,62 @@
+# Single-File HTML Drag-and-Drop Uploader Prompt
+
+## Objective
+Generate a complete, self-contained HTML file (using the Tailwind CSS CDN) for a modern, responsive, drag-and-drop file uploader component. The file must include embedded custom CSS variables for theming and all necessary JavaScript for functionality, dark/light mode toggle, and state management.
+
+## 1. Theming and Variables (Embedded <style> block)
+Define CSS variables using a dark blue-purple and darkest gray scheme. Implement dark mode using the `.dark` class on the `<html>` tag.
+
+* **Color Palette (Variables):**
+    * `--color-primary`: Used for buttons and accents. (Light: #6D28D9, Dark: #A78BFA)
+    * `--color-secondary`: Used for component background. (Light: #F3F4F6, Dark: #1F2937)
+    * `--color-text`: Default text color. (Light: #1F2937, Dark: #F3F4F6)
+    * `--color-border-dash`: Drag area border. (Light: #D1D5DB, Dark: #4B5563)
+    * `--color-success`: Green shade for success.
+    * `--color-error`: Red shade for errors.
+
+## 2. HTML Structure & UI Requirements
+
+### A. Main Layout
+* Responsive container (`max-w-3xl`, centered).
+* A **Dark Mode Toggle Button** (Moon/Sun icon) in the top right of the container.
+
+### B. Drag-and-Drop Area (#drop-area)
+* Must be a **dashed border** (`border-2 border-dashed`) using `--color-border-dash`.
+* Contents must be centered:
+    1.  Large **Cloud Upload Icon** (SVG, using primary color).
+    2.  **Bold, attention-grabbing label**: "Drag and drop your images and files here".
+    3.  Small text for file types: "Supported: JPG, PNG, PDF, Max 10MB".
+    4.  Separator ("OR").
+    5.  Custom-styled **"Browse files" button** (Primary color background).
+* Must visually change (e.g., border color brightens) on **dragover** event.
+* Includes a hidden `<input type="file" multiple accept="image/*,application/pdf">`.
+
+### C. Uploaded File List (#file-list)
+* Initially hidden (`hidden` class).
+* Structure: A list of rows, one per file, with four logical columns:
+    1.  **Preview (100x80px):** Thumbnail for images, or a default file icon.
+    2.  **Filename (Primary text):** The file's name.
+    3.  **Meta Info (Auto-Width):** Small, gray text below the filename: `{media_type} · {media_size (e.g., 5.2 MB)} · {media_extention}`. This column's width should adjust automatically.
+    4.  **Remove Button:** A small, red-accented **Trash Icon** button.
+
+### D. Actions and Status
+* **Upload Button (#upload-btn):** Fully rounded (`rounded-full`), primary color background. Text: "Start Upload (0 files)". Should be disabled when empty.
+* **Status Message Area (#status-message):** Hidden div. Displays animated success/error tick/X icon and corresponding text (e.g., "Upload Complete!").
+
+## 3. JavaScript Logic (Embedded <script> block)
+
+* **State Management:** Use a global `uploadedFiles = []` array.
+* **Event Handlers:** Implement `dragover`, `dragleave`, `drop` for the drag area, and `change` for the file input.
+* **`addFileToList(file)`:**
+    * Adds file to the `uploadedFiles` array.
+    * Reads and formats file properties (size, type, extension).
+    * Generates the full **HTML list item structure** (including preview logic via `FileReader` for images) and appends it to `#file-list`.
+    * Updates the count on `#upload-btn`.
+* **Remove Logic:** Implements a click handler on the trash icon to remove the file from the array and the DOM element.
+* **`handleUpload()`:**
+    * Attached to `#upload-btn`.
+    * Simulate API call (`setTimeout` for 2 seconds).
+    * On completion, display the **Success message** in `#status-message` (with a pulsing/ticking CSS animation) for 5 seconds, then hide it, and clear the file list/array.
+* **Theme Toggle:** Implements the function to toggle the `dark` class on the `<html>` element.
+
+---
