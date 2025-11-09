@@ -1,0 +1,54 @@
+Responsive Tailwind CSS Contact Page – Dark/Light Mode  
+(Notepad-style prompt: copy/paste into any editor)
+
+---
+
+PROMPT START  
+“Build a single, self-contained HTML file for a responsive contact section.  
+The outer wrapper has class .contact-sec.  
+It must satisfy every numbered rule below exactly as written.  
+Use only Tailwind CSS utilities; no external CSS files.  
+Use plain JavaScript for dark-mode toggle, form validation, and SweetAlert2 success popup.  
+Add subtle entrance animations via Animate.css (fadeInUp).  
+Supply the complete code block—no explanations, no omissions.”
+
+RULES  
+1  .contact-sec sits in a centered container, full-width on mobile, max-w-6xl on desktop.  
+   Background: gray-100 (light) / gray-900 (dark).  
+   Two-column on ≥md: grid-cols-1 md:grid-cols-2 gap-8 p-8.
+
+2  Left column (contact info) – sample content ready to edit:  
+   - Subheading: text-sm uppercase tracking-wide text-blue-500 → “Get in Touch”  
+   - Heading: text-3xl font-bold text-gray-800 dark:text-white → “Let’s Talk About Everything”  
+   - Description: text-gray-600 dark:text-gray-300 mt-2 → “Fill out the form or drop us a line—our team usually replies within 24 hours.”  
+   - Icon list:  
+     A. HeroIcon envelope mini, label “Email”, text “hello@yourbrand.com”  
+     B. HeroIcon phone mini, label “Phone”, text “+1 (555) 123-4567”  
+   Each list item: flex items-left space-x-3 mb-4.label and text will in single group. label show top and text show bottom.
+
+3  Right column (form card):  
+   Card: bg-white dark:bg-gray-800 rounded-xl shadow-md p-6.  
+   Fields: Name, Email, Subject, Message.  
+   Inputs: w-full px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-blue-400.  
+   Textarea rows=5.  
+   Submit button: dark-blue bg (bg-blue-700 hover:bg-blue-800) text-white rounded-lg px-6 py-3 flex items-center space-x-2.  
+   Icon inside button: HeroIcon paper-airplane mini, left side.
+
+4  Validation (vanilla JS):  
+   required on all fields; email must match simple regex.  
+   On error: outline-red-500 + shake animation (animate__animated animate__shakeX).  
+   On success: SweetAlert2 fire “Message sent!” then reset form.
+
+5  Dark mode:  
+   Toggle button fixed top-4 right-4 rounded-full p-2 bg-gray-200 dark:bg-gray-700.  
+   JS toggles &lt;html&gt; class “dark” and persists to localStorage.theme.
+
+6  Entrance animations:  
+   Add animate__animated animate__fadeInUp to .contact-sec and stagger children with delay-100, delay-200, etc.
+
+7  Fonts:  
+   Inter via Tailwind CDN font-sans.
+
+8  Meta & viewport already included—no need to repeat.
+
+Return only the full, ready-to-save HTML snippet.  
