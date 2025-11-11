@@ -1,0 +1,45 @@
+==================================================
+FAQ ACCORDION SECTION (MODERN, RESPONSIVE, L/D MODE)
+==================================================
+
+SECTION HEADER (BIG, BOLD, BLACK):
+Frequently Asked Questions
+
+BODY/BACKGROUND:
+- Light Gray background (Day Mode)
+- Dark Gray background (Night Mode)
+
+UI STYLE:
+- Accordion design with Plus/Minus icons.
+- Individual FAQ items have White/Dark Gray backgrounds, subtle shadow, and rounded corners.
+- Black text in Day Mode, White/Light Gray text in Night Mode.
+
+---
+FAQ ITEM 1
+---
+
+QUESTION:
+What makes your service responsive?
+
+ANSWER:
+Our services use a mobile-first design approach with flexible grids and media queries. This ensures that the layout adjusts perfectly to any screen size, from smartphones to large desktop monitors, providing an optimal viewing experience for all users.
+
+---
+FAQ ITEM 2
+---
+
+QUESTION:
+How is light and dark mode compatibility achieved?
+
+ANSWER:
+We use Tailwind CSS's built-in 'dark:' utility classes. By adding the 'dark' class to the main HTML tag, colors automatically swap from light primary colors (like white backgrounds and black text) to dark primary colors (like dark gray backgrounds and white text).
+
+---
+FAQ ITEM 3
+---
+
+QUESTION:
+Can I customize the accordion appearance?
+
+ANSWER:
+Absolutely! Since the component is built entirely with Tailwind CSS, you can easily modify colors, fonts, spacing, and border styles by adjusting the utility classes applied to the header and content containers.
