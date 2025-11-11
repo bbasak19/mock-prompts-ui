@@ -1,0 +1,83 @@
+======================================
+POPUP 1: IMAGE FORM (TWO COLUMN)
+======================================
+please use tailwind css. also need responsive and light and drak mode code there.
+LAYOUT:
+- LEFT: Content
+- RIGHT: Image (Unsplash - e.g., Abstract/Tech)
+
+LEFT COLUMN CONTENT:
+--------------------
+
+[SVG DUMMY LOGO HERE]
+
+POPUP TITLE (BIG, BOLD, BLACK):
+Unlock Exclusive Content & Resources
+
+SHORT DESCRIPTION:
+Join our newsletter today and be the first to receive premium guides, early access to new features, and special behind-the-scenes content delivered straight to your inbox. Don't miss out!
+
+EMAIL SUBSCRIPTION FORM:
+[Input: Enter your email address]
+[Button: Subscribe]
+
+SMALL TEXT (TERM & PRIVACY):
+By subscribing, you agree to our Terms of Service and confirm you have read our Privacy Policy.
+
+
+
+
+======================================
+POPUP 2: SHOP PROMOTIONAL (TWO COLUMN)
+======================================
+please use tailwind css. also need responsive and light and drak mode code there. please use close button.
+LAYOUT:
+- LEFT (30%): Image (Unsplash - e.g., Shopping/Products)
+- RIGHT (70%): Content (Very Light Background)
+
+RIGHT COLUMN CONTENT:
+---------------------
+
+[SVG DUMMY LOGO HERE]
+
+SUBHEADING:
+You've unlocked a special surprise! Your next purchase just got cheaper.
+
+BIG BOLD TITLE OF OFFER:
+GET 45% OFF
+YOUR ENTIRE ORDER
+
+SMALL DESCRIPTION:
+Subscribe to our VIP list now to claim your unique discount code immediately. Start saving big on all your favorites!
+
+EMAIL NEWSLETTER FORM:
+[Input: Your best email]
+[Button: Claim Now]
+
+SMALL INFO TEXT:
+*Offer valid for new subscribers only. Limited time offer.
+
+
+======================================
+POPUP 3: SHOP PROMOTIONAL (SMALL, SINGLE COLUMN)
+======================================
+please use tailwind css. also need responsive and light and drak mode code there.
+[SVG GIFT BOX IMAGE HERE]
+
+SAVE TEXT:
+🎉 You've Been Selected!
+
+50% OFF TEXT (BIG, BOLD, RED):
+50% OFF
+
+SMALL DESCRIPTION:
+Enter your email below to save instantly on your entire first order. We saved this just for you!
+
+EMAIL INPUT (GRAY):
+[Input: Enter your email]
+
+GOTT IT BUTTON (LIGHT RED):
+Get My Code!
+
+TRANSPARENT BUTTON (BLACK, UNDERLINE):
+No thanks, I'll pay full price
