@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Accordion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .accordion.active .accordion-content {
+            max-height: 500px;
+        }
+        
+        .accordion.active .accordion-icon .plus {
+            display: none;
+        }
+        
+        .accordion.active .accordion-icon .minus {
+            display: block;
+        }
+        
+        .accordion:not(.active) .accordion-icon .plus {
+            display: block;
+        }
+        
+        .accordion:not(.active) .accordion-icon .minus {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen py-12 px-4 transition-colors duration-300">
+    <div class="max-w-3xl mx-auto">
+        <!-- Section Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+                Frequently Asked Questions
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                Find answers to common questions about our services and features.
+            </p>
+        </div>
+        
+        <!-- FAQ Accordion -->
+        <div class="space-y-4">
+            <!-- FAQ Item 1 -->
+            <div class="accordion bg-white dark:bg-gray-800 rounded-xl shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden">
+                <button class="accordion-header w-full flex justify-between items-center p-6 text-left focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl">
+                    <h3 class="text-lg md:text-xl font-semibold text-gray-900 dark:text-white pr-4">
+                        What makes your service responsive?
+                    </h3>
+                    <div class="accordion-icon flex-shrink-0 w-6 h-6 text-blue-600 dark:text-blue-400">
+                        <i class="fas fa-plus plus"></i>
+                        <i class="fas fa-minus minus"></i>
+                    </div>
+                </button>
+                <div class="accordion-content">
+                    <div class="px-6 pb-6">
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            Our services use a mobile-first design approach with flexible grids and media queries. This ensures that the layout adjusts perfectly to any screen size, from smartphones to large desktop monitors, providing an optimal viewing experience for all users.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 2 -->
+            <div class="accordion bg-white dark:bg-gray-800 rounded-xl shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden">
+                <button class="accordion-header w-full flex justify-between items-center p-6 text-left focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl">
+                    <h3 class="text-lg md:text-xl font-semibold text-gray-900 dark:text-white pr-4">
+                        How is light and dark mode compatibility achieved?
+                    </h3>
+                    <div class="accordion-icon flex-shrink-0 w-6 h-6 text-blue-600 dark:text-blue-400">
+                        <i class="fas fa-plus plus"></i>
+                        <i class="fas fa-minus minus"></i>
+                    </div>
+                </button>
+                <div class="accordion-content">
+                    <div class="px-6 pb-6">
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            We use Tailwind CSS's built-in 'dark:' utility classes. By adding the 'dark' class to the main HTML tag, colors automatically swap from light primary colors (like white backgrounds and black text) to dark primary colors (like dark gray backgrounds and white text).
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 3 -->
+            <div class="accordion bg-white dark:bg-gray-800 rounded-xl shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden">
+                <button class="accordion-header w-full flex justify-between items-center p-6 text-left focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl">
+                    <h3 class="text-lg md:text-xl font-semibold text-gray-900 dark:text-white pr-4">
+                        Can I customize the accordion appearance?
+                    </h3>
+                    <div class="accordion-icon flex-shrink-0 w-6 h-6 text-blue-600 dark:text-blue-400">
+                        <i class="fas fa-plus plus"></i>
+                        <i class="fas fa-minus minus"></i>
+                    </div>
+                </button>
+                <div class="accordion-content">
+                    <div class="px-6 pb-6">
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            Absolutely! Since the component is built entirely with Tailwind CSS, you can easily modify colors, fonts, spacing, and border styles by adjusting the utility classes applied to the header and content containers.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 4 (Additional example) -->
+            <div class="accordion bg-white dark:bg-gray-800 rounded-xl shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden">
+                <button class="accordion-header w-full flex justify-between items-center p-6 text-left focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl">
+                    <h3 class="text-lg md:text-xl font-semibold text-gray-900 dark:text-white pr-4">
+                        Is there a free trial available?
+                    </h3>
+                    <div class="accordion-icon flex-shrink-0 w-6 h-6 text-blue-600 dark:text-blue-400">
+                        <i class="fas fa-plus plus"></i>
+                        <i class="fas fa-minus minus"></i>
+                    </div>
+                </button>
+                <div class="accordion-content">
+                    <div class="px-6 pb-6">
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            Yes, we offer a 14-day free trial for all new users. You can explore all features without any commitment. No credit card is required to start your trial.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 5 (Additional example) -->
+            <div class="accordion bg-white dark:bg-gray-800 rounded-xl shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden">
+                <button class="accordion-header w-full flex justify-between items-center p-6 text-left focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl">
+                    <h3 class="text-lg md:text-xl font-semibold text-gray-900 dark:text-white pr-4">
+                        How can I get support if I need help?
+                    </h3>
+                    <div class="accordion-icon flex-shrink-0 w-6 h-6 text-blue-600 dark:text-blue-400">
+                        <i class="fas fa-plus plus"></i>
+                        <i class="fas fa-minus minus"></i>
+                    </div>
+                </button>
+                <div class="accordion-content">
+                    <div class="px-6 pb-6">
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            We provide multiple support channels including email support, live chat during business hours, and a comprehensive knowledge base with tutorials and documentation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dark mode toggle -->
+    <button id="darkModeToggle" class="fixed top-6 right-6 p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg text-gray-800 dark:text-yellow-300 transition-colors duration-300">
+        <i class="fas fa-moon dark:hidden"></i>
+        <i class="fas fa-sun hidden dark:block"></i>
+    </button>
+    
+    <script>
+        // Dark mode toggle functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+        
+        // Check for saved theme preference or respect OS setting
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+        
+        // Toggle dark mode
+        darkModeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            localStorage.theme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+        });
+        
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(button => {
+            button.addEventListener('click', () => {
+                const accordion = button.parentElement;
+                accordion.classList.toggle('active');
+                
+                // Close other accordions (optional - remove if you want multiple open)
+                document.querySelectorAll('.accordion').forEach(otherAccordion => {
+                    if (otherAccordion !== accordion) {
+                        otherAccordion.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
