@@ -1,0 +1,30 @@
+MOCKUP PROMPT: MOBILE STICKY FOOTER NAVIGATION
+
+CONTEXT:
+Design a high-fidelity mockup of a responsive, mobile-only sticky footer menu, suitable for a Bootstrap-based website.
+
+DEVICE VIEWPORT:
+Smartphone (e.g., 375px - 414px width).
+
+FOOTER STYLING REQUIREMENTS:
+1. Position: Sticky/Fixed to the bottom of the screen.
+2. Background: White.
+3. Top Shadow: Apply a light shadow effect (equivalent to `box-shadow: 0 -2px 18px rgba(0, 0, 0, 0.12);`).
+4. Corner Styling: Rounded top corners (equivalent to `border-radius: 24px 24px 0 0;`).
+
+MENU STRUCTURE:
+1. Total Items: Five (5) equally spaced items across the footer width.
+2. Layout: Icon on top, centered label text below the icon.
+
+ITEM DETAILS:
+
+| # | Label | Icon | Default Icon Color | Hover/Active Color | Label Color/Font |
+|---|---|---|---|---|---|
+| 1 | Home | House (SVG) | rgba(135, 135, 135, 1) | rgba(70, 171, 201, 1) | rgba(45, 69, 82, 1) / 10px / 400 |
+| 2 | Who we serve | Medical Suitcase | rgba(135, 135, 135, 1) | rgba(70, 171, 201, 1) | rgba(45, 69, 82, 1) / 10px / 400 |
+| 3 | Solutions | Stethoscope | rgba(135, 135, 135, 1) | rgba(70, 171, 201, 1) | rgba(45, 69, 82, 1) / 10px / 400 |
+| 4 | Contact | Phone Dial | rgba(135, 135, 135, 1) | rgba(70, 171, 201, 1) | rgba(45, 69, 82, 1) / 10px / 400 |
+| 5 | More | Vertical 3-Dot (Kebab) | rgba(135, 135, 135, 1) | rgba(70, 171, 201, 1) | rgba(45, 69, 82, 1) / 10px / 400 |
+
+VISUALIZATION REQUEST:
+Show the menu in the mobile viewport. Highlight the "Solutions" item as the ACTIVE state (using the Hover/Active Color) to demonstrate the interaction effect.
