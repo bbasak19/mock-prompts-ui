@@ -1,0 +1,45 @@
+//==============================================================
+// HTML (index.html) Prompt Requirements
+//==============================================================
+
+// GOAL: Create a responsive feature section with light/dark mode support.
+
+// 1. Structure: Use a main container like <div class="feature-section">.
+// 2. Heading (Bold & Center): Use <h1> with class "center-heading" and text "Our Features".
+// 3. Description (Center): Use <p> with class "center-description" for a two-line description.
+// 4. Cards Container: Use <div class="icon-cards-container"> to hold the four cards.
+// 5. Card Structure (x4): Each card should be <div class="icon-card"> containing:
+//    a. Graphics Div: <div class="icon-graphics"> (Place an SVG icon here, e.g., security, speed).
+//    b. Title: <h2> with class "icon-card-title".
+//    c. Description: <p class="icon-card-description"> (Dummy content for two lines).
+// 6. Mode Toggle: Include a mechanism (like a button or checkbox) to add/remove the 'dark-mode' class to the <body> element.
+
+//==============================================================
+// CSS (style.css) Prompt Requirements
+//==============================================================
+
+// 1. Color Variables: Define CSS custom properties (:root) for:
+//    - --background-color (light: #f7f7f7)
+//    - --text-color (light: #1a1a1a)
+//    - --heading-color (light: #000000 - must be **BLACK** in light mode)
+//    - --card-background (light: #ffffff)
+//    - --icon-color (light accent color)
+
+// 2. Dark Mode: Define overrides for the custom properties under the selector **.dark-mode** (e.g., .dark-mode { --background-color: #1a1a1a; ... }).
+
+// 3. Base Styling: Apply background and text colors using variables to the <body>. Include a transition (e.g., 0.3s) for smooth mode switching.
+
+// 4. Heading Styling:
+//    - Target .center-heading: **bold**, center-aligned, use **--heading-color**.
+
+// 5. Layout (Responsiveness):
+//    - Target .icon-cards-container: Use Flexbox or Grid for layout.
+//    - Target .icon-card: Set a default width (100% or max-width) and apply **box-shadow** using a variable.
+
+// 6. Media Queries:
+//    - Implement breakpoints (e.g., min-width: 768px, 1024px) to display:
+//      - 768px+: 2 cards per row.
+//      - 1024px+: 4 cards per row.
+
+// 7. Description Ellipsis:
+//    - Target .icon-card-description: Use the **-webkit-line-clamp: 2** property (and associated vendor prefixes/properties) to ensure the description is exactly **two lines** long, followed by an ellipsis (...).
