@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Section with Light/Dark Mode</title>
+    <style>
+        /* ============================================================== */
+        /* CSS Custom Properties (Variables) */
+        /* ============================================================== */
+
+        :root {
+            /* Light Mode Colors */
+            --background-color: #f7f7f7;
+            --text-color: #1a1a1a;
+            --heading-color: #000000; /* BLACK in light mode */
+            --card-background: #ffffff;
+            --icon-color: #3b82f6;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --toggle-background: #e5e7eb;
+            --toggle-slider: #ffffff;
+        }
+
+        .dark-mode {
+            /* Dark Mode Colors */
+            --background-color: #1a1a1a;
+            --text-color: #f7f7f7;
+            --heading-color: #ffffff;
+            --card-background: #2d2d2d;
+            --icon-color: #60a5fa;
+            --card-shadow: rgba(0, 0, 0, 0.3);
+            --toggle-background: #4b5563;
+            --toggle-slider: #d1d5db;
+        }
+
+        /* ============================================================== */
+        /* Base Styling */
+        /* ============================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* ============================================================== */
+        /* Theme Toggle Styling */
+        /* ============================================================== */
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--toggle-background);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: var(--toggle-slider);
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--icon-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .toggle-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        /* ============================================================== */
+        /* Feature Section Styling */
+        /* ============================================================== */
+
+        .feature-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Heading Styling */
+        .center-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--heading-color);
+            margin-bottom: 20px;
+        }
+
+        .center-description {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            max-width: 600px;
+            margin: 0 auto 60px;
+            opacity: 0.8;
+        }
+
+        /* ============================================================== */
+        /* Cards Container Styling */
+        /* ============================================================== */
+
+        .icon-cards-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        /* ============================================================== */
+        /* Individual Card Styling */
+        /* ============================================================== */
+
+        .icon-card {
+            background: var(--card-background);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px var(--card-shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dark-mode .icon-card {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .icon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px var(--card-shadow);
+        }
+
+        .icon-graphics {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, var(--icon-color), #8b5cf6);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .icon-graphics svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .icon-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--heading-color);
+            margin-bottom: 15px;
+        }
+
+        /* Description Ellipsis Styling */
+        .icon-card-description {
+            color: var(--text-color);
+            opacity: 0.8;
+            line-height: 1.6;
+            
+            /* Multi-line ellipsis */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            
+            /* Fallback for non-webkit browsers */
+            max-height: 3.2em;
+            overflow: hidden;
+        }
+
+        /* ============================================================== */
+        /* Media Queries - Responsive Design */
+        /* ============================================================== */
+
+        /* Tablet - 2 cards per row */
+        @media (min-width: 768px) {
+            .icon-cards-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            
+            .center-heading {
+                font-size: 3rem;
+            }
+            
+            .feature-section {
+                padding: 80px 40px;
+            }
+        }
+
+        /* Desktop - 4 cards per row */
+        @media (min-width: 1024px) {
+            .icon-cards-container {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 30px;
+            }
+            
+            .center-heading {
+                font-size: 3.5rem;
+            }
+            
+            .feature-section {
+                padding: 100px 20px;
+            }
+        }
+
+        /* Large Desktop */
+        @media (min-width: 1440px) {
+            .icon-cards-container {
+                gap: 40px;
+            }
+            
+            .icon-card {
+                padding: 50px 30px;
+            }
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 480px) {
+            .feature-section {
+                padding: 40px 15px;
+            }
+            
+            .center-heading {
+                font-size: 2rem;
+            }
+            
+            .center-description {
+                font-size: 1rem;
+                margin-bottom: 40px;
+            }
+            
+            .icon-card {
+                padding: 30px 20px;
+            }
+            
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <div class="theme-toggle">
+        <label class="switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider"></span>
+        </label>
+        <span class="toggle-label">Dark Mode</span>
+    </div>
+
+    <!-- Feature Section -->
+    <div class="feature-section">
+        <h1 class="center-heading">Our Features</h1>
+        <p class="center-description">Discover the amazing features that make our product stand out from the competition and help you achieve your goals efficiently.</p>
+        
+        <div class="icon-cards-container">
+            <!-- Card 1 -->
+            <div class="icon-card">
+                <div class="icon-graphics">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M19.4 15C19.2669 15.3031 19.1337 15.6062 19.0006 15.9094C18.5298 16.8984 18.0589 17.8875 17.5881 18.8766C17.2806 19.5337 16.9731 20.1909 16.6656 20.8481C16.3031 21.6337 15.3031 21.6337 14.9406 20.8481C14.7394 20.3812 14.5381 19.9144 14.3369 19.4475C13.8231 18.2137 13.3094 16.98 12.7956 15.7462C12.6675 15.4481 12.3675 15.2625 12.0456 15.2625C11.7237 15.2625 11.4237 15.4481 11.2956 15.7462C10.7819 16.98 10.2681 18.2137 9.75437 19.4475C9.55312 19.9144 9.35187 20.3812 9.15062 20.8481C8.78812 21.6337 7.78812 21.6337 7.42562 20.8481C7.11812 20.1909 6.81062 19.5337 6.50312 18.8766C6.03234 17.8875 5.56156 16.8984 5.09078 15.9094C4.95766 15.6062 4.82453 15.3031 4.69141 15C4.82453 14.6969 4.95766 14.3938 5.09078 14.0906C5.56156 13.1016 6.03234 12.1125 6.50312 11.1234C6.81062 10.4663 7.11812 9.80906 7.42562 9.15187C7.78812 8.36625 8.78812 8.36625 9.15062 9.15187C9.35187 9.61875 9.55312 10.0856 9.75437 10.5525C10.2681 11.7862 10.7819 13.02 11.2956 14.2537C11.4237 14.5519 11.7237 14.7375 12.0456 14.7375C12.3675 14.7375 12.6675 14.5519 12.7956 14.2537C13.3094 13.02 13.8231 11.7862 14.3369 10.5525C14.5381 10.0856 14.7394 9.61875 14.9406 9.15187C15.3031 8.36625 16.3031 8.36625 16.6656 9.15187C16.9731 9.80906 17.2806 10.4663 17.5881 11.1234C18.0589 12.1125 18.5298 13.1016 19.0006 14.0906C19.1337 14.3938 19.2669 14.6969 19.4 15Z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h2 class="icon-card-title">Security First</h2>
+                <p class="icon-card-description">Enterprise-grade security with end-to-end encryption and multi-factor authentication to keep your data safe and protected at all times.</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="icon-card">
+                <div class="icon-graphics">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h2 class="icon-card-title">Lightning Fast</h2>
+                <p class="icon-card-description">Optimized performance with rapid loading times and seamless user experience across all devices and network conditions.</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="icon-card">
+                <div class="icon-graphics">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 12H16M12 8V16M12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h2 class="icon-card-title">Easy Integration</h2>
+                <p class="icon-card-description">Simple API integration with comprehensive documentation and dedicated support team to help you get started quickly.</p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="icon-card">
+                <div class="icon-graphics">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h2 class="icon-card-title">24/7 Support</h2>
+                <p class="icon-card-description">Round-the-clock customer support with expert technicians ready to assist you with any issues or questions you may have.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dark Mode Toggle Functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        
+        darkModeToggle.addEventListener('change', function() {
+            document.body.classList.toggle('dark-mode', this.checked);
+            
+            // Save user preference in localStorage
+            if (this.checked) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Check for saved theme preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                darkModeToggle.checked = true;
+            }
+        });
+    </script>
+</body>
+</html>
