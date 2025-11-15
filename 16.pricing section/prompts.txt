@@ -1,0 +1,91 @@
+Prompt: Single-File, Dual-Mode Responsive SaaS Pricing Page
+
+Generate a single, complete, and functional HTML file for a SaaS pricing page named "Atlas SaaS." The file must include all necessary HTML, CSS (using Tailwind CSS), and JavaScript logic to run independently in a browser.
+
+1. Technical & Structural Requirements (Mandatory)
+
+Single File Mandate: All code (HTML structure, Tailwind CSS classes, and JavaScript logic) must reside within one pricing_page.html file.
+
+Aesthetics: Use Tailwind CSS (via CDN).
+
+Font: Use the Inter font via Google Fonts.
+
+General Style: Use modern, rounded corners and clean, highly contrasted layouts.
+
+Colors: Use a primary accent color of Emerald (e.g., emerald-600) for all primary buttons, highlights, and successful indicators.
+
+Responsiveness: The layout must be fully responsive, collapsing the three pricing cards into a single column on mobile (small screens) and displaying them in a three-column grid on desktop (large screens).
+
+2. Functionality Requirements (Interactive)
+
+Dual Light/Dark Mode Toggle:
+
+Include a prominent toggle button (preferably in the header) that switches the entire page between light and dark modes by toggling the dark class on the <html> element.
+
+Ensure all elements (background, cards, text) adapt their colors smoothly.
+
+Billing Cycle Toggle:
+
+Include a functional toggle switch labeled "Monthly" and "Annual" located above the pricing cards.
+
+The toggle must be styled professionally (e.g., a pill-shaped container).
+
+Logic: When switched to "Annual," the prices must update to reflect a 20% discount (mocked in JavaScript) and change the pricing label from /mo to /yr.
+
+Include a callout text nearby: "Save 20% by paying annually!"
+
+3. Content and Tiers
+
+Create three distinct pricing tiers: Starter, Pro, and Ultimate, with the following price and CTA details:
+
+Starter Tier
+
+Monthly Price: $19
+
+Annual Price (20% Discount): $15
+
+Highlight: Standard
+
+CTA Button Text: Start Free Trial
+
+Pro Tier
+
+Monthly Price: $49
+
+Annual Price (20% Discount): $39
+
+Highlight: MOST POPULAR (This tier requires special highlighting)
+
+CTA Button Text: Choose Pro
+
+Ultimate Tier
+
+Monthly Price: $199
+
+Annual Price (20% Discount): $159
+
+Highlight: High-End / Enterprise Focus
+
+CTA Button Text: Contact Sales
+
+Tier-Specific Styling
+
+Pro Tier: This card must be visually highlighted.
+
+Apply a distinct ring border using the primary Emerald color.
+
+In dark mode, add a subtle, visible glow effect (e.g., a box-shadow using a transparent Emerald color) to make it stand out further.
+
+Include a "MOST POPULAR" badge placed prominently on this card.
+
+CTA Buttons: The CTA button for the Pro plan must use the primary Emerald color for the background, while the Starter plan should use a lighter secondary color (e.g., emerald-100 text on white/gray).
+
+Feature List (Per Card)
+
+Each card must contain a detailed list of features with checkmark icons (<svg>) using the primary Emerald color.
+
+Starter (Focus: Essentials): 5 Users, Standard Analytics, 10GB Storage, Basic Email Support, 99.5% Uptime SLA.
+
+Pro (Focus: Growth & Power): Unlimited Users, Advanced Analytics (Custom Reports), API Access, Dedicated Chat/Email Support, Unlimited Storage, 99.9% Uptime SLA, Custom Branding.
+
+Ultimate (Focus: Enterprise): Everything in Pro, plus: White-Glove Onboarding, Custom Security, Dedicated Account Manager, 99.99% Uptime SLA.
