@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple, Transparent Pricing</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for smooth dark mode transition */
+        html {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .billing-toggle-btn {
+            transition: all 0.3s ease;
+        }
+        /* Styling for the subtle glow on the Pro card in dark mode */
+        .dark .pro-glow {
+            box-shadow: 0 0 30px rgba(52, 211, 153, 0.4); /* Emerald 400 glow */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen antialiased pt-8 pb-16">
+
+    <div id="app" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header & Dark Mode Toggle -->
+        <header class="flex justify-between items-center mb-12">
+            <div class="text-2xl font-extrabold text-gray-900 dark:text-white">
+                Atlas SaaS
+            </div>
+            
+            <!-- Dark Mode Toggle Switch -->
+            <button id="mode-toggle" onclick="toggleDarkMode()" class="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 transition-colors duration-300 shadow-md" aria-label="Toggle dark mode">
+                <!-- Moon Icon (Dark Mode - default shown) -->
+                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+                <!-- Sun Icon (Light Mode) -->
+                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+            </button>
+        </header>
+
+        <!-- Main Heading -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-gray-50 leading-tight">
+                Simple, Transparent Pricing.
+            </h1>
+            <p class="mt-4 text-xl text-gray-500 dark:text-gray-400">
+                Choose the plan that's right for your growing team.
+            </p>
+        </div>
+
+        <!-- Billing Cycle Toggle & Callout -->
+        <div class="flex flex-col items-center mb-10 space-y-4">
+            <!-- Callout -->
+            <div class="bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 text-sm font-semibold px-4 py-1.5 rounded-full">
+                Save 20% by paying annually!
+            </div>
+            
+            <!-- Billing Toggle -->
+            <div class="inline-flex rounded-xl bg-gray-200 dark:bg-gray-700 p-1 shadow-inner">
+                <button id="monthly-btn" onclick="toggleBilling(true)" class="billing-toggle-btn px-6 py-2 text-sm font-medium rounded-lg text-white bg-emerald-600 dark:bg-emerald-600 shadow-md">
+                    Monthly
+                </button>
+                <button id="annual-btn" onclick="toggleBilling(false)" class="billing-toggle-btn px-6 py-2 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                    Annual
+                </button>
+            </div>
+        </div>
+
+        <!-- Pricing Cards Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Card 1: Starter Tier -->
+            <div class="p-8 bg-white dark:bg-gray-800 rounded-xl shadow-xl dark:shadow-none dark:border dark:border-gray-700 transition-all duration-500">
+                <p class="text-sm font-semibold text-emerald-600 mb-2">Starter</p>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-4">
+                    <span id="price-starter">$19</span><span class="text-xl font-medium text-gray-500 dark:text-gray-400">/mo</span>
+                </h2>
+                <p class="text-gray-500 dark:text-gray-400 mb-6">
+                    Perfect for small teams and essential functionality.
+                </p>
+                
+                <a href="#" onclick="console.log('Starter CTA clicked')" class="block w-full text-center py-3 bg-emerald-100 text-emerald-600 font-semibold rounded-lg hover:bg-emerald-200 transition duration-300">
+                    Start Free Trial
+                </a>
+
+                <ul class="mt-8 space-y-4">
+                    <!-- Feature List -->
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span class="font-medium">5 Users</span> included
+                    </li>
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span class="font-medium">Standard Analytics</span> dashboard
+                    </li>
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        10GB of cloud storage
+                    </li>
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        Basic email support
+                    </li>
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        SLA: 99.5% Uptime Guarantee
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Card 2: Pro Tier (Highlighted) -->
+            <div class="p-8 bg-white dark:bg-gray-800 rounded-xl shadow-2xl ring-4 ring-emerald-500 dark:ring-emerald-400 dark:shadow-none pro-glow transition-all duration-500 relative transform scale-105 lg:scale-100">
+                <span class="absolute top-0 right-0 -mt-3 mr-4 px-4 py-1 text-xs font-bold uppercase rounded-full bg-emerald-600 text-white shadow-lg">
+                    MOST POPULAR
+                </span>
+                <p class="text-sm font-semibold text-emerald-600 mb-2">Pro</p>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-4">
+                    <span id="price-pro">$49</span><span class="text-xl font-medium text-gray-500 dark:text-gray-400">/mo</span>
+                </h2>
+                <p class="text-gray-500 dark:text-gray-400 mb-6">
+                    Scale your operations with powerful features and priority support.
+                </p>
+                
+                <a href="#" onclick="console.log('Pro CTA clicked')" class="block w-full text-center py-3 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition duration-300 shadow-lg">
+                    Choose Pro
+                </a>
+
+                <ul class="mt-8 space-y-4">
+                    <!-- Feature List -->
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span class="font-medium">Unlimited Users</span> & seats
+                    </li>
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span class="font-medium">Advanced Analytics</span> with custom reports
+                    </li>
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span class="font-medium">API Access</span> & integration library
+                    </li>
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        Dedicated chat and email support
+                    </li>
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        Unlimited storage
+                    </li>
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        SLA: 99.9% Uptime Guarantee
+                    </li>
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        Custom branding options
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Card 3: Ultimate Tier -->
+            <div class="p-8 bg-white dark:bg-gray-800 rounded-xl shadow-xl dark:shadow-none dark:border dark:border-gray-700 transition-all duration-500">
+                <p class="text-sm font-semibold text-emerald-600 mb-2">Ultimate</p>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-4">
+                    <span id="price-ultimate">$199</span><span class="text-xl font-medium text-gray-500 dark:text-gray-400">/mo</span>
+                </h2>
+                <p class="text-gray-500 dark:text-gray-400 mb-6">
+                    Designed for large corporations needing maximum control and service.
+                </p>
+                
+                <a href="#" onclick="console.log('Ultimate CTA clicked')" class="block w-full text-center py-3 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700 transition duration-300">
+                    Contact Sales
+                </a>
+
+                <ul class="mt-8 space-y-4">
+                    <!-- Feature List -->
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        Everything in Pro, plus:
+                    </li>
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span class="font-medium">White-Glove Onboarding</span>
+                    </li>
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        Custom security protocols
+                    </li>
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        Dedicated account manager
+                    </li>
+                    <li class="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg class="h-5 w-5 text-emerald-500 flex-shrink-0 mr-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span class="font-medium">99.99% Uptime SLA</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Dual Mode Toggle Logic ---
+        const htmlElement = document.documentElement;
+        const modeToggle = document.getElementById('mode-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        /** Toggles the dark class on the HTML element */
+        function toggleDarkMode() {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                // Update icons: show Moon (dark mode trigger), hide Sun
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
+            } else {
+                htmlElement.classList.add('dark');
+                // Update icons: show Sun (light mode trigger), hide Moon
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+            }
+        }
+
+        // Initialize mode based on the starting class (which is 'light' in the HTML tag)
+        if (htmlElement.classList.contains('dark')) {
+            moonIcon.classList.add('hidden');
+            sunIcon.classList.remove('hidden');
+        } else {
+            moonIcon.classList.remove('hidden');
+            sunIcon.classList.add('hidden');
+        }
+
+
+        // --- Billing Cycle Toggle Logic (Mock) ---
+        const monthlyBtn = document.getElementById('monthly-btn');
+        const annualBtn = document.getElementById('annual-btn');
+        
+        const prices = {
+            monthly: { starter: 19, pro: 49, ultimate: 199, label: '/mo' },
+            annual: { starter: 15, pro: 39, ultimate: 159, label: '/yr' } // Mocking 20% discount
+        };
+
+        let isMonthly = true;
+
+        /** Mocks the price change based on the billing cycle */
+        function toggleBilling(toMonthly) {
+            if (isMonthly === toMonthly) return; // No change needed
+
+            isMonthly = toMonthly;
+            const currentCycle = isMonthly ? prices.monthly : prices.annual;
+            const billingText = isMonthly ? '/mo' : '/yr';
+
+            // 1. Update button styling
+            if (isMonthly) {
+                // Monthly is active
+                monthlyBtn.classList.add('bg-emerald-600', 'text-white');
+                monthlyBtn.classList.remove('text-gray-600', 'dark:text-gray-300', 'hover:text-gray-900', 'dark:hover:text-white');
+                
+                annualBtn.classList.remove('bg-emerald-600', 'text-white');
+                annualBtn.classList.add('text-gray-600', 'dark:text-gray-300', 'hover:text-gray-900', 'dark:hover:text-white');
+            } else {
+                // Annual is active
+                annualBtn.classList.add('bg-emerald-600', 'text-white');
+                annualBtn.classList.remove('text-gray-600', 'dark:text-gray-300', 'hover:text-gray-900', 'dark:hover:text-white');
+                
+                monthlyBtn.classList.remove('bg-emerald-600', 'text-white');
+                monthlyBtn.classList.add('text-gray-600', 'dark:text-gray-300', 'hover:text-gray-900', 'dark:hover:text-white');
+            }
+
+            // 2. Update price displays
+            document.getElementById('price-starter').textContent = '$' + currentCycle.starter;
+            document.getElementById('price-pro').textContent = '$' + currentCycle.pro;
+            document.getElementById('price-ultimate').textContent = '$' + currentCycle.ultimate;
+            
+            // Update all '/mo' to '/yr' or vice-versa
+            document.querySelectorAll('.text-xl.font-medium.text-gray-500, .dark\\:text-gray-400').forEach(span => {
+                span.textContent = billingText;
+            });
+            
+            console.log(`Billing cycle toggled to ${isMonthly ? 'Monthly' : 'Annual'}. Prices updated.`);
+        }
+
+        // Initialize billing cycle display
+        window.onload = () => {
+             // Ensure the initial state is Monthly (set in HTML and JS variable)
+             toggleBilling(true);
+        };
+    </script>
+</body>
+</html>

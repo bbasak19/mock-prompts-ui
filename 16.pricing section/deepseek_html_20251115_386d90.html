@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas SaaS - Pricing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .toggle-bg:after {
+            content: '';
+            @apply absolute top-0.5 left-0.5 bg-white border border-gray-300 rounded-full h-5 w-5 transition shadow-sm;
+        }
+        input:checked + .toggle-bg:after {
+            transform: translateX(100%);
+            @apply border-white;
+        }
+        input:checked + .toggle-bg {
+            @apply bg-emerald-600 border-emerald-600;
+        }
+        .dark .toggle-bg:after {
+            @apply bg-gray-700 border-gray-600;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <header class="container mx-auto px-4 py-6 flex justify-between items-center">
+        <div class="flex items-center">
+            <h1 class="text-2xl font-bold text-emerald-600">Atlas SaaS</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="theme-toggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                <svg id="theme-icon" class="w-5 h-5 text-gray-800 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Choose the perfect plan for your business needs. All plans include core features with no hidden fees.</p>
+        </div>
+
+        <div class="flex justify-center mb-8">
+            <div class="flex items-center space-x-4 bg-white dark:bg-gray-800 rounded-full p-1 shadow-sm">
+                <span class="px-4 py-2 text-sm font-medium">Monthly</span>
+                <div class="relative">
+                    <input type="checkbox" id="billing-toggle" class="sr-only">
+                    <label for="billing-toggle" class="toggle-bg block w-12 h-6 rounded-full cursor-pointer bg-gray-200 border border-gray-300 dark:bg-gray-700 dark:border-gray-600"></label>
+                </div>
+                <span class="px-4 py-2 text-sm font-medium">Annual</span>
+            </div>
+        </div>
+
+        <div class="text-center mb-8">
+            <p id="discount-text" class="text-emerald-600 font-medium hidden">Save 20% by paying annually!</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <!-- Starter Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 flex flex-col h-full">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold mb-2">Starter</h3>
+                    <div class="flex items-baseline mb-4">
+                        <span class="text-4xl font-bold" id="starter-price">$19</span>
+                        <span class="text-gray-600 dark:text-gray-400 ml-1" id="starter-period">/mo</span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400">Perfect for small teams getting started</p>
+                </div>
+                <button class="mt-auto w-full py-3 px-4 rounded-lg font-medium bg-emerald-100 text-emerald-700 hover:bg-emerald-200 transition-colors">Start Free Trial</button>
+                <ul class="mt-6 space-y-4 flex-grow">
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>5 Users</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Standard Analytics</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>10GB Storage</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Basic Email Support</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>99.5% Uptime SLA</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Pro Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 flex flex-col h-full relative ring-2 ring-emerald-500 dark:shadow-emerald-500/20">
+                <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <span class="bg-emerald-500 text-white text-xs font-semibold px-3 py-1 rounded-full">MOST POPULAR</span>
+                </div>
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold mb-2">Pro</h3>
+                    <div class="flex items-baseline mb-4">
+                        <span class="text-4xl font-bold" id="pro-price">$49</span>
+                        <span class="text-gray-600 dark:text-gray-400 ml-1" id="pro-period">/mo</span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400">Ideal for growing businesses</p>
+                </div>
+                <button class="mt-auto w-full py-3 px-4 rounded-lg font-medium bg-emerald-600 text-white hover:bg-emerald-700 transition-colors">Choose Pro</button>
+                <ul class="mt-6 space-y-4 flex-grow">
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Unlimited Users</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Advanced Analytics (Custom Reports)</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>API Access</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Dedicated Chat/Email Support</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Unlimited Storage</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>99.9% Uptime SLA</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Custom Branding</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Ultimate Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 flex flex-col h-full">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold mb-2">Ultimate</h3>
+                    <div class="flex items-baseline mb-4">
+                        <span class="text-4xl font-bold" id="ultimate-price">$199</span>
+                        <span class="text-gray-600 dark:text-gray-400 ml-1" id="ultimate-period">/mo</span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400">For enterprise-level organizations</p>
+                </div>
+                <button class="mt-auto w-full py-3 px-4 rounded-lg font-medium bg-gray-800 text-white hover:bg-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors">Contact Sales</button>
+                <ul class="mt-6 space-y-4 flex-grow">
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Everything in Pro</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>White-Glove Onboarding</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Custom Security</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Dedicated Account Manager</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>99.99% Uptime SLA</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference or respect OS preference
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (savedTheme === 'dark') {
+            htmlElement.classList.add('dark');
+            themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
+            }
+        });
+
+        // Billing Toggle Logic
+        const billingToggle = document.getElementById('billing-toggle');
+        const discountText = document.getElementById('discount-text');
+        
+        // Price elements
+        const starterPrice = document.getElementById('starter-price');
+        const starterPeriod = document.getElementById('starter-period');
+        const proPrice = document.getElementById('pro-price');
+        const proPeriod = document.getElementById('pro-period');
+        const ultimatePrice = document.getElementById('ultimate-price');
+        const ultimatePeriod = document.getElementById('ultimate-period');
+        
+        // Original prices
+        const monthlyPrices = {
+            starter: 19,
+            pro: 49,
+            ultimate: 199
+        };
+        
+        // Calculate annual prices (20% discount)
+        const annualPrices = {
+            starter: Math.round(monthlyPrices.starter * 0.8),
+            pro: Math.round(monthlyPrices.pro * 0.8),
+            ultimate: Math.round(monthlyPrices.ultimate * 0.8)
+        };
+        
+        billingToggle.addEventListener('change', () => {
+            if (billingToggle.checked) {
+                // Switch to annual billing
+                starterPrice.textContent = `$${annualPrices.starter}`;
+                starterPeriod.textContent = '/yr';
+                proPrice.textContent = `$${annualPrices.pro}`;
+                proPeriod.textContent = '/yr';
+                ultimatePrice.textContent = `$${annualPrices.ultimate}`;
+                ultimatePeriod.textContent = '/yr';
+                discountText.classList.remove('hidden');
+            } else {
+                // Switch to monthly billing
+                starterPrice.textContent = `$${monthlyPrices.starter}`;
+                starterPeriod.textContent = '/mo';
+                proPrice.textContent = `$${monthlyPrices.pro}`;
+                proPeriod.textContent = '/mo';
+                ultimatePrice.textContent = `$${monthlyPrices.ultimate}`;
+                ultimatePeriod.textContent = '/mo';
+                discountText.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
