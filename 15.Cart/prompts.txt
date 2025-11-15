@@ -1,0 +1,77 @@
+Generate a complete, self-contained HTML document for a modern and fully responsive Shopping Cart Page.
+
+Technology Requirements:
+
+Use the Tailwind CSS CDN for all styling.
+
+The entire application, including all HTML, CSS (via Tailwind), and JavaScript, MUST be contained within this single .html file.
+
+Use the Inter font family (via Google Fonts or a simple Tailwind default font stack).
+
+Design & Layout Principles:
+
+Aesthetics: The design must be clean, professional, and high-conversion focused. Use soft white backgrounds for containers, gentle shadows (shadow-lg), and medium rounded corners (rounded-xl).
+
+Color Palette: Use a neutral palette (shades of gray) with a vibrant, contrasting color (e.g., Indigo or Green) for primary calls to action (the Checkout button).
+
+Responsiveness (CRITICAL):
+
+On mobile devices (screens < 768px), the layout must stack vertically (Cart Items on top, Summary below).
+
+On desktop/tablet (screens > 768px), use a two-column flex/grid layout: Cart Items on the left (approx 60-65% width) and Order Summary on the right (approx 35-40% width). The page must be centrally contained (max-w-7xl, mx-auto).
+
+Content & Functional Sections (Mock Data):
+
+Page Title: A clear title like "Your Shopping Cart" or "Review Your Order".
+
+Cart Items List:
+
+Display a minimum of three distinct mock products. Use compelling product names (e.g., 'Aura Pro Noise-Cancelling Headphones', 'Zenith Ergonomic Mechanical Keyboard', 'Sentinel Smart Home Camera').
+
+Per Item:
+
+Placeholder Image: Use a high-contrast placeholder URL (e.g., https://placehold.co/120x120/4F46E5/FFFFFF?text=Product).
+
+Product Name, Category/Variant (e.g., "Color: Midnight Black").
+
+Quantity Control: Use a responsive input field or simple buttons (+ / -) to manage quantity.
+
+Price Display: Show the unit price and the line-item subtotal.
+
+Removal Action: Include a small 'Remove' button (using a trash icon or inline SVG) to visually remove the item (only mock the removal in JS; don't truly delete it).
+
+Order Summary Card (Sticky on desktop, if possible):
+
+Title: "Order Summary".
+
+Line Items: Clearly display:
+
+Merchandise Subtotal.
+
+Estimated Shipping (e.g., $15.00, Free over $100).
+
+Estimated Tax (calculated at 7.5% of the subtotal).
+
+Order Total (Largest and boldest font).
+
+Coupon Input: An input field for "Coupon Code" with an adjacent 'Apply' button.
+
+Checkout Button: A large, highly visible button labeled "Proceed to Checkout".
+
+JavaScript Implementation:
+
+Create a simple JavaScript function, calculateTotal(), that runs on page load.
+
+The function should:
+
+Initialize mock prices and quantities for the three products.
+
+Calculate the line-item subtotal for each product.
+
+Calculate the Merchandise Subtotal.
+
+Calculate the 7.5% Tax.
+
+Calculate and display the final Order Total in the Order Summary card.
+
+Add simple mock event listeners to the quantity controls so that changing a quantity visually updates the line-item subtotal and the final Order Total.
