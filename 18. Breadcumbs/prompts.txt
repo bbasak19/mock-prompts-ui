@@ -1,0 +1,55 @@
+# Comprehensive Prompt for Tailwind Components
+
+## Component 1: Breadcrumb Navigation (4 Styles)
+
+### Goal
+Create a section containing four distinct, aesthetically different **Breadcrumb Navigation** components. All must be built using **Tailwind CSS**.
+
+### Requirements for Each Style
+1.  **Shared Structure:** Each breadcrumb must have 4-5 items (e.g., Home > Category > Subcategory > Product Title). The last item should be marked as the active page.
+2.  **Responsiveness:** Ensure long paths wrap gracefully on smaller screens.
+3.  **A11y:** Use proper ARIA attributes (e.g., `aria-label="breadcrumb"`, `aria-current="page"`).
+
+### Specific Style Variations
+
+* **Style 1: Simple Default (Classic Separator)**
+    * **Separator:** Use a simple chevron or slash (`/` or `>`).
+    * **Appearance:** Minimalist, using standard text colors.
+* **Style 2: Arrow/Chevron Background**
+    * **Separator:** Use a unique shape (e.g., a pseudo-element or border manipulation) to create an **arrow/pointer** style where the background of each item is shaped like an arrow.
+    * **Appearance:** Slightly bolder look, maybe using subtle background colors on hover.
+* **Style 3: Dot Separator (Minimalist)**
+    * **Separator:** Use a small circular dot (`•`) or a colon (`:`).
+    * **Appearance:** Very clean and spaced out, suitable for highly professional interfaces.
+* **Style 4: Custom Icon Separator**
+    * **Separator:** Use a small, decorative icon (e.g., a tiny house, a forward arrow icon from an icon library like Font Awesome/Heroicons mock-up).
+    * **Appearance:** Incorporate subtle rounded corners and distinguish the active link with a strong text weight or color.
+
+---
+
+## Component 2: Product Filter Sidebar Menu
+
+### Goal
+Create a complete, responsive **product filter sidebar menu** using **Tailwind CSS**. The component must support both light and dark mode.
+
+### Key Requirements (Tailwind & Responsiveness)
+
+| Feature | Requirement Details |
+| :--- | :--- |
+| **Tailwind Utility Classes** | Use utility-first classes exclusively (e.g., `flex`, `p-4`, `bg-white`, `dark:bg-gray-800`). |
+| **Responsiveness** | **Mobile First:** Hidden by default on small screens (`sm:hidden`). **Tablet/Desktop:** Visible as a narrow sidebar (`lg:block`, `w-64`). Include a mobile toggle button. |
+| **Dark Mode** | Implement the `dark:` prefix for **all** colors (backgrounds, text, borders) for a complete visual transition. |
+| **Layout** | Use a flex column for the filters. Ensure padding and margin are consistent. |
+| **A11y** | Use appropriate ARIA attributes for the mobile toggle and proper semantic HTML (`<aside>`, `<label>`). |
+
+### Content for Filter Sections
+
+* **Category Filter (Checkboxes):** Electronics, Apparel, Home Goods.
+* **Price Range (Slider Mock):** Display a mock range input or two simple input fields (Min/Max).
+* **Color Filter (Swatches):** Use small, circular color swatches (e.g., Black, White, Red, Blue).
+* **Action Buttons:** 'Apply Filters' and 'Clear All' buttons at the bottom.
+
+---
+
+## Output Format
+Provide the **complete HTML/CSS** for both the Breadcrumb section and the Sidebar section in a single file. Assume Tailwind is loaded via CDN or configured correctly. Ensure all dark mode classes are included in the Sidebar component.
