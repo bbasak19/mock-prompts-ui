@@ -1,0 +1,65 @@
+# Prompt for Tailwind CSS Product Filter Sidebar
+
+## Goal
+Create a complete, responsive product filter sidebar menu using **Tailwind CSS**. The component must be functional, aesthetically pleasing, and support both light and dark mode.
+
+## Components & Structure
+1.  **Main Container:** A fixed or sticky sidebar container.
+2.  **Toggle Button:** A hamburger/menu icon to show/hide the sidebar on smaller screens (mobile/tablet).
+3.  **Filter Sections:** Include at least three distinct filter categories.
+4.  **Filter Elements:** Use a mix of common filter input types (checkboxes, radio buttons, sliders).
+5.  **Action Buttons:** 'Apply Filters' and 'Clear All'.
+6.  **Light/Dark Mode Toggle:** A simple switch (e.g., sun/moon icon) to demonstrate the mode switch functionality (handling the actual state logic is secondary to the visual styling).
+
+## Key Requirements (Tailwind & Responsiveness)
+
+| Feature | Requirement Details |
+| :--- | :--- |
+| **Tailwind Utility Classes** | Use utility-first classes exclusively (e.g., `flex`, `p-4`, `bg-white`, `dark:bg-gray-800`). |
+| **Responsiveness** | **Mobile First:** Hidden by default on small screens (`sm:hidden`). **Tablet/Desktop:** Visible as a narrow sidebar (`lg:block`, `w-64`). Use breakpoints (`sm:`, `md:`, `lg:`). |
+| **Dark Mode** | Implement the `dark:` prefix for **all** colors (backgrounds, text, borders) to ensure a complete visual transition. |
+| **Layout** | Use a flex column for the filters. Ensure padding and margin are consistent. |
+| **Accessibility (A11y)** | Use appropriate ARIA attributes (e.g., `aria-expanded`, `aria-controls`) for the mobile toggle and proper semantic HTML (e.g., `<aside>`, `<label>`). |
+
+## Specific Content for Filter Sections
+
+* **Category Filter (Checkboxes):**
+    * **Title:** Product Category
+    * **Options:** Electronics, Apparel, Home Goods, Books
+* **Price Range (Slider/Input Fields):**
+    * **Title:** Price
+    * **Element:** A simple range display (e.g., $10 - $500) or a mock slider.
+* **Color Filter (Radio Buttons/Color Swatches):**
+    * **Title:** Color
+    * **Options:** Black, White, Red, Blue (Use circular swatches for the options).
+* **Rating Filter (Checkboxes):**
+    * **Title:** Customer Rating
+    * **Options:** 5 Stars, 4 Stars & Up, 3 Stars & Up (Use star icons or a simple number).
+
+## Output Format
+Provide the **complete HTML/CSS (Tailwind CDN or config)** for the entire component. Focus on the styling and structure. Include a mock setup where the sidebar is integrated with a simple main content area.
+
+---
+
+## Code Structure Outline (For Reference)
+
+```html
+<div class="flex">
+    <button class="lg:hidden ..."></button>
+
+    <aside id="filter-sidebar" class="w-64 bg-white dark:bg-gray-800 transition-all duration-300 ...">
+        <div class="p-4 border-b ...">...</div>
+
+        <div class="p-4">
+            </div>
+        
+        <div class="p-4 border-t ...">
+            <button>Apply Filters</button>
+            <button>Clear All</button>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-8 ...">
+        <h2>Product List Placeholder</h2>
+    </main>
+</div>
