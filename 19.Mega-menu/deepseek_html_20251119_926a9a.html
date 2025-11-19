@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Mega Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1e40af',
+                        dark: '#1f2937',
+                        light: '#f9fafb'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .mega-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        
+        .mobile-menu.open {
+            max-height: 1000px;
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .accordion-content.open {
+            max-height: 500px;
+        }
+        
+        @media (max-width: 1023px) {
+            .mega-menu {
+                position: static;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+            }
+            
+            .mobile-menu.open .mega-menu {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0 flex items-center">
+                        <h2 class="text-xl font-bold text-white">TechCorp</h2>
+                    </div>
+                    
+                    <!-- Desktop Navigation -->
+                    <div class="hidden lg:ml-6 lg:flex lg:items-center lg:space-x-4">
+                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition duration-150">Home</a>
+                        
+                        <!-- Products Menu Item -->
+                        <div class="relative nav-item">
+                            <button class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 flex items-center" aria-expanded="false" aria-haspopup="true">
+                                Products
+                                <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            
+                            <!-- Mega Menu Dropdown -->
+                            <div class="mega-menu absolute left-0 w-screen max-w-6xl bg-white shadow-xl rounded-md py-5 z-10 border border-gray-200 mt-1">
+                                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                                    <!-- Menu Content Grid -->
+                                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                                        <!-- Featured Section -->
+                                        <div class="lg:col-span-1 relative rounded-lg overflow-hidden shadow-md">
+                                            <img src="https://picsum.photos/300/400" alt="Pro Suite 2026 Release" class="w-full h-full object-cover">
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+                                                <h3 class="text-xl font-bold text-white mb-2">Pro Suite 2026 Release</h3>
+                                                <p class="text-gray-200 mb-4">The ultimate productivity suite with AI-powered features for modern teams.</p>
+                                                <button class="bg-primary hover:bg-secondary text-white font-semibold py-2 px-4 rounded-lg transition duration-150 w-full">
+                                                    See Details
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Software & Tools Column -->
+                                        <div>
+                                            <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Software & Tools</h4>
+                                            <ul class="space-y-3">
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-desktop text-primary"></i>
+                                                        </span>
+                                                        Operating Systems
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-file-alt text-primary"></i>
+                                                        </span>
+                                                        Productivity Suite
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-shield-alt text-primary"></i>
+                                                        </span>
+                                                        Security Software
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-code text-primary"></i>
+                                                        </span>
+                                                        Development Tools
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-palette text-primary"></i>
+                                                        </span>
+                                                        Creative Applications
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <!-- Hardware Solutions Column -->
+                                        <div>
+                                            <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Hardware Solutions</h4>
+                                            <ul class="space-y-3">
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-laptop text-primary"></i>
+                                                        </span>
+                                                        Laptops & Desktops
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-server text-primary"></i>
+                                                        </span>
+                                                        Servers & Storage
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-network-wired text-primary"></i>
+                                                        </span>
+                                                        Networking Equipment
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-keyboard text-primary"></i>
+                                                        </span>
+                                                        Peripherals
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-mobile-alt text-primary"></i>
+                                                        </span>
+                                                        Mobile Devices
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <!-- Professional Services Column -->
+                                        <div>
+                                            <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Professional Services</h4>
+                                            <ul class="space-y-3">
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-users text-primary"></i>
+                                                        </span>
+                                                        Consulting
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-cogs text-primary"></i>
+                                                        </span>
+                                                        Implementation
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-headset text-primary"></i>
+                                                        </span>
+                                                        Technical Support
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-graduation-cap text-primary"></i>
+                                                        </span>
+                                                        Training
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="text-gray-600 hover:text-primary transition duration-150 group flex items-center">
+                                                        <span class="group-hover:bg-primary/10 rounded p-1 mr-2">
+                                                            <i class="fas fa-tools text-primary"></i>
+                                                        </span>
+                                                        Managed Services
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Search Bar -->
+                                    <div class="mt-8 pt-6 border-t border-gray-200">
+                                        <div class="relative max-w-xl mx-auto">
+                                            <input type="search" placeholder="Search products, services, and more..." class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <i class="fas fa-search text-gray-400"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition duration-150">Solutions</a>
+                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition duration-150">Support</a>
+                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition duration-150">Company</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none focus:text-white" aria-expanded="false" aria-controls="mobile-menu">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu lg:hidden bg-gray-800 border-t border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Home</a>
+                
+                <!-- Mobile Products Menu -->
+                <div class="relative">
+                    <button id="mobile-products-button" class="flex justify-between w-full px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900" aria-expanded="false" aria-controls="mobile-products-content">
+                        <span>Products</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    
+                    <!-- Mobile Mega Menu -->
+                    <div id="mobile-products-content" class="mega-menu bg-gray-700 rounded-md mt-1 p-4 accordion-content">
+                        <!-- Featured Section -->
+                        <div class="relative rounded-lg overflow-hidden shadow-md mb-4">
+                            <img src="https://picsum.photos/300/400" alt="Pro Suite 2026 Release" class="w-full h-48 object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-4">
+                                <h3 class="text-lg font-bold text-white mb-2">Pro Suite 2026 Release</h3>
+                                <p class="text-gray-200 mb-3 text-sm">The ultimate productivity suite with AI-powered features.</p>
+                                <button class="bg-primary hover:bg-secondary text-white font-semibold py-2 px-4 rounded-lg transition duration-150 w-full text-sm">
+                                    See Details
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Software & Tools Accordion -->
+                        <div class="mb-4">
+                            <button class="accordion-toggle flex justify-between w-full px-3 py-2 rounded-md text-base font-medium text-white bg-gray-600" aria-expanded="false" aria-controls="software-content">
+                                <span>Software & Tools</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div id="software-content" class="accordion-content bg-gray-800 rounded-md mt-1 px-3">
+                                <ul class="space-y-2 py-2">
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Operating Systems</a></li>
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Productivity Suite</a></li>
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Security Software</a></li>
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Development Tools</a></li>
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Creative Applications</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Hardware Solutions Accordion -->
+                        <div class="mb-4">
+                            <button class="accordion-toggle flex justify-between w-full px-3 py-2 rounded-md text-base font-medium text-white bg-gray-600" aria-expanded="false" aria-controls="hardware-content">
+                                <span>Hardware Solutions</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div id="hardware-content" class="accordion-content bg-gray-800 rounded-md mt-1 px-3">
+                                <ul class="space-y-2 py-2">
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Laptops & Desktops</a></li>
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Servers & Storage</a></li>
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Networking Equipment</a></li>
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Peripherals</a></li>
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Mobile Devices</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Professional Services Accordion -->
+                        <div class="mb-2">
+                            <button class="accordion-toggle flex justify-between w-full px-3 py-2 rounded-md text-base font-medium text-white bg-gray-600" aria-expanded="false" aria-controls="services-content">
+                                <span>Professional Services</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div id="services-content" class="accordion-content bg-gray-800 rounded-md mt-1 px-3">
+                                <ul class="space-y-2 py-2">
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Consulting</a></li>
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Implementation</a></li>
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Technical Support</a></li>
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Training</a></li>
+                                    <li><a href="#" class="block text-gray-300 hover:text-white transition duration-150 py-1">Managed Services</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Search Bar -->
+                        <div class="mt-4 pt-4 border-t border-gray-600">
+                            <div class="relative">
+                                <input type="search" placeholder="Search..." class="w-full pl-10 pr-4 py-2 bg-gray-600 text-white border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-search text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Solutions</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Support</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Company</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Responsive Mega Menu</h1>
+            <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+                This demo showcases a fully responsive mega menu with a 4-column layout on desktop and an accordion-style menu on mobile.
+            </p>
+            <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+                <div class="rounded-md shadow">
+                    <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-secondary md:py-4 md:text-lg md:px-10 transition duration-150">
+                        Get started
+                    </a>
+                </div>
+                <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+                    <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 transition duration-150">
+                        Learn more
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feature Cards -->
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <i class="fas fa-desktop text-primary text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Desktop Experience</h3>
+                <p class="text-gray-600">Hover over "Products" to see the full 4-column mega menu with featured section and search bar.</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <i class="fas fa-mobile-alt text-primary text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Mobile Experience</h3>
+                <p class="text-gray-600">On smaller screens, click the hamburger icon to open the accordion-style mobile menu.</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <i class="fas fa-palette text-primary text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Modern Design</h3>
+                <p class="text-gray-600">Clean, professional styling with smooth transitions and accessibility features.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            
+            this.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Mobile products menu toggle
+        document.getElementById('mobile-products-button').addEventListener('click', function() {
+            const megaMenu = document.getElementById('mobile-products-content');
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            
+            this.setAttribute('aria-expanded', !isExpanded);
+            megaMenu.classList.toggle('open');
+            
+            // Rotate icon
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        });
+
+        // Accordion toggles
+        document.querySelectorAll('.accordion-toggle').forEach(button => {
+            button.addEventListener('click', function() {
+                const targetId = this.getAttribute('aria-controls');
+                const target = document.getElementById(targetId);
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                
+                this.setAttribute('aria-expanded', !isExpanded);
+                target.classList.toggle('open');
+                
+                // Rotate icon
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+    </script>
+</body>
+</html>
