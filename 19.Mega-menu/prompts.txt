@@ -1,0 +1,33 @@
+Generate the complete HTML and Tailwind CSS code for a fully functional, responsive **Mega Menu Dropdown** component. The solution must be self-contained in a single file or block.
+
+### **I. Overall Structure & Trigger:**
+
+1.  **Navigation Bar:** Create a simple navigation bar (`<nav>`) containing the trigger element.
+2.  **Trigger Element:** The mega menu should open when the user **hovers** over a main navigation link labeled "**Products**".
+3.  **Dropdown Container:** The dropdown panel must be positioned absolutely relative to the main navigation bar and should span the majority of the screen width on desktop.
+
+### **II. Desktop (Large Screen) Implementation (>= lg breakpoint):**
+
+1.  **Layout:** The mega menu content area must use a **4-column grid layout** (`grid-cols-4`).
+2.  **Column 1 (Featured CTA):**
+    * **Content:** This column is dedicated to a prominent feature.
+    * **Image:** Use a **Lorem Picsum** image URL (`https://picsum.photos/300/400`) as the background or within an `<img>` tag.
+    * **Text/CTA:** Overlay the image with a title ("Pro Suite 2026 Release"), a brief description, and a bright, visible call-to-action button ("See Details").
+    * **Styling:** Use a distinct background color and rounded corners for visual appeal.
+3.  **Columns 2, 3, & 4 (Link Groups):**
+    * **Headings:** Each column must have a distinct, bold category heading: "**Software & Tools**" (Col 2), "**Hardware Solutions**" (Col 3), and "**Professional Services**" (Col 4).
+    * **Links:** Under each heading, provide at least five dummy links using list items (`<li>`) with clear hover effects (e.g., subtle background change). The links should use the class `group` for advanced hover styling.
+4.  **Utility Bar:** Integrate a full-width **search bar** (`<input type="search">`) positioned **below** the 4-column grid, spanning across all four columns for a clean look.
+
+### **III. Mobile (Small Screen) Implementation (< lg breakpoint):**
+
+1.  **Toggle:** The main navigation bar must show a **hamburger icon** to toggle the visibility of the menu.
+2.  **Layout:** When opened on mobile, the menu must convert to a **full-width, single-column stack**.
+3.  **Content:** The desktop's 4-column content must stack vertically. Use an **accordion** style where the category headings ("Software & Tools," "Hardware Solutions," etc.) act as toggles to reveal their respective link lists.
+4.  **Interactivity:** Use minimal JavaScript to handle the mobile menu toggle (open/close).
+
+### **IV. Styling and Interactivity:**
+
+* **Colors:** Use a modern color palette (e.g., `bg-gray-800` for the nav, `bg-white` or `bg-gray-50` for the dropdown).
+* **Transitions:** Apply smooth `transition` classes for the dropdown's appearance and disappearance for a polished look.
+* **Accessibility:** Ensure the use of ARIA attributes (`aria-expanded`, `aria-controls`) is included for both the desktop hover state and the mobile toggle.
